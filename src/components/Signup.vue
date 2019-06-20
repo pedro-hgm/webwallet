@@ -15,7 +15,7 @@
             prepend-icon="vpn_key"
             :rules="rules"
           ></v-text-field>
-          <v-btn @click="submit" flat class="mx-0 mt-3">Join us</v-btn>
+          <v-btn @click="Signup" flat class="mx-0 mt-3">Join us</v-btn>
         </v-form>
       </v-card-text>
     </v-card>
@@ -23,18 +23,43 @@
 </template>
 
 <script>
+import axios from "axios";
+//import router from "@/router.js";
 export default {
   data() {
     return {
       email: "",
       password: "",
-      rules: [value => value.length > 5 || "Choose at least five characters"]
+      rules: [value => value.length > 0 || "Can't be blank"],
+      feedback: null
     };
   },
   methods: {
-    submit() {
+    Signup() {
       if (this.$refs.form.validate()) {
-        console.log(this.email, this.password);
+        const user = {
+          email: this.email,
+          password: this.password
+        };
+        axios
+          .post("http://localhost:3000/users", {
+            user
+          })
+          .then(res => {
+            console.log(res);
+            if (res.statusText === "Created") {
+              this.$router.push({
+                name: "dashboard",
+                params: { userId: res.data }
+              });
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+
+        this.email = "";
+        this.password = "";
       }
     }
   }

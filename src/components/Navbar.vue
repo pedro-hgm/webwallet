@@ -6,17 +6,17 @@
     </v-snackbar>-->
 
     <v-toolbar app flat color="grey lighten-2">
-      <v-toolbar-side-icon v-if="user" @click="drawer = !drawer" class="black--text"></v-toolbar-side-icon>
+      <v-toolbar-side-icon @click="drawer = !drawer" class="black--text"></v-toolbar-side-icon>
       <v-toolbar-title class="text-uppercase black--text">
         <span class="font-weight-light">web</span>
         <span>wallet</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-
-      <v-btn flat color="black">
+      <Login/>
+      <!-- <v-btn flat color="black">
         <span>Login</span>
         <v-icon right>exit_to_app</v-icon>
-      </v-btn>
+      </v-btn>-->
     </v-toolbar>
 
     <v-navigation-drawer app v-model="drawer" class="blue-grey darken-4">
@@ -35,15 +35,14 @@
 </template>
 
 <script>
-// import Popup from "./Popup";
+import Login from "@/components/Login.vue";
 export default {
-  // components: { Popup },
+  components: { Login },
   data() {
     return {
       drawer: false,
-      user: true,
       links: [
-        { icon: "dashboard", text: "Dashboard", route: "/" },
+        { icon: "dashboard", text: "Dashboard", route: "/dashboard" },
         { icon: "folder", text: "My Projects", route: "/projects" },
         { icon: "person", text: "Team", route: "/team" }
       ],
