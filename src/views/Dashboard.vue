@@ -12,7 +12,6 @@
 import axios from "axios";
 export default {
   name: "Dashboard",
-  props: ["userId"],
   data() {
     return {
       user: {
@@ -22,12 +21,21 @@ export default {
   },
   created() {
     axios
-      .get(`http://localhost:3000/users/${this.userId}`)
+      .get(`http://localhost:3000/users/${this.$store.getters.userId}`)
       .then(res => {
         console.log(res);
         this.user.email = res.data;
       })
       .catch(err => console.log(err));
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      if (vm.$store.getters.userLogin === true) {
+        next();
+      } else {
+        next({ name: "home" });
+      }
+    });
   }
 };
 </script>

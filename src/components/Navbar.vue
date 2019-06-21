@@ -6,17 +6,17 @@
     </v-snackbar>-->
 
     <v-toolbar app flat color="grey lighten-2">
-      <v-toolbar-side-icon @click="drawer = !drawer" class="black--text"></v-toolbar-side-icon>
+      <v-toolbar-side-icon v-if="userLogin" @click="drawer = !drawer" class="black--text"></v-toolbar-side-icon>
       <v-toolbar-title class="text-uppercase black--text">
         <span class="font-weight-light">web</span>
         <span>wallet</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <Login/>
-      <!-- <v-btn flat color="black">
-        <span>Login</span>
+      <Login v-if="!userLogin"/>
+      <v-btn v-else @click="logout" flat color="black">
+        <span>Logout</span>
         <v-icon right>exit_to_app</v-icon>
-      </v-btn>-->
+      </v-btn>
     </v-toolbar>
 
     <v-navigation-drawer app v-model="drawer" class="blue-grey darken-4">
@@ -48,6 +48,18 @@ export default {
       ],
       snackbar: false
     };
+  },
+  methods: {
+    logout() {
+      this.$store.commit("changeStatus", false);
+      this.$store.commit("changeId", null);
+      this.$router.push({ name: "home" });
+    }
+  },
+  computed: {
+    userLogin() {
+      return this.$store.getters.userLogin;
+    }
   }
 };
 </script>

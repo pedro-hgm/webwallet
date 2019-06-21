@@ -15,18 +15,9 @@ export default new Router({
 			component : Home
 		},
 		{
-			path        : '/dashboard',
-			name        : 'dashboard',
-			component   : Dashboard,
-			props       : true,
-			beforeEnter : (to, from, next) => {
-				if (to.params.userId) {
-					next();
-				}
-				else {
-					next({ name: 'home' });
-				}
-			}
+			path      : '/dashboard',
+			name      : 'dashboard',
+			component : Dashboard
 		}
 	]
 });

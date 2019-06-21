@@ -24,7 +24,6 @@
 
 <script>
 import axios from "axios";
-//import router from "@/router.js";
 export default {
   data() {
     return {
@@ -48,9 +47,10 @@ export default {
           .then(res => {
             console.log(res);
             if (res.statusText === "Created") {
+              this.$store.commit("changeStatus", true);
+              this.$store.commit("changeId", res.data);
               this.$router.push({
-                name: "dashboard",
-                params: { userId: res.data }
+                name: "dashboard"
               });
             }
           })

@@ -55,11 +55,12 @@ export default {
           .then(res => {
             console.log(res);
             if (res.status === 200) {
-              this.$router.push({
-                name: "dashboard",
-                params: { userId: res.data }
-              });
               this.dialog = false;
+              this.$store.commit("changeStatus", true);
+              this.$store.commit("changeId", res.data);
+              this.$router.push({
+                name: "dashboard"
+              });
             }
           })
           .catch(err => {
@@ -72,37 +73,6 @@ export default {
     }
   }
 };
-// login() {
-//       const login = {
-//         email: this.email,
-//         password: this.password
-//       };
-
-//       const { email, password } = login;
-
-//       axios
-//         .post("http://localhost:3000/users/login", {
-//           email,
-//           password
-//         })
-//         .then(res => {
-//           console.log(res);
-//           if (res.status === 200) {
-//             this.token = res.data.auth_token;
-//             this.msg = "You're now logged in!";
-//             this.alert = "alert alert-success";
-//             router.push("dashboard");
-//           }
-//         })
-//         .catch(err => {
-//           console.log(err);
-//           this.msg = "Unable to login";
-//           this.alert = "alert alert-danger";
-//         });
-
-//       this.email = "";
-//       this.password = "";
-//     }
 </script>
 
 <style>
