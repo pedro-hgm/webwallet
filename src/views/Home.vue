@@ -24,5 +24,4 @@ export default {
     Signup
   }
 };
-// TODO: router-guard; navbar-reactive; login component and logic
 </script>

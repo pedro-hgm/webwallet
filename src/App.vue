@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import axios from "axios";
 import Navbar from "./components/Navbar";
 
 export default {
@@ -17,9 +17,7 @@ export default {
     Navbar
   },
   data() {
-    return {
-      //
-    };
+    return {};
   },
   methods: {},
   created() {}
