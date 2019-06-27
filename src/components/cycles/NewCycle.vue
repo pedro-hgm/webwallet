@@ -55,39 +55,6 @@
             </template>
             <v-date-picker :rules="rules" v-model="date" no-title></v-date-picker>
           </v-menu>
-
-          <!-- <v-select
-            :rules="rules"
-            prepend-icon="account_balance"
-            v-model="account_id"
-            :items="accounts"
-            item-text="name"
-            item-value="id"
-            label="Accounts"
-            class="mt-3"
-            multiple
-          ></v-select>-->
-
-          <!-- <v-container>
-            <v-layout row justify-space-around>
-              <v-flex xs12>
-                <h3 class="grey--text mb-2">
-                  <v-icon class="mr-2">account_balance</v-icon>Account:
-                </h3>
-
-                <form
-                  :rules="rules"
-                  class="ml-4 my-2"
-                  v-for="account in accounts"
-                  :key="account.id"
-                >
-                  <input v-model="account_id" type="radio" :name="account.name" :value="account.id">
-                  <span class="ml-1 subheading grey--text font-weight-bold">{{ account.name }}</span>
-                  <br>
-                </form>
-              </v-flex>
-            </v-layout>
-          </v-container>-->
           <v-layout justify-center row>
             <v-btn
               @click="create"
@@ -109,15 +76,9 @@ export default {
   name: "NewCycle",
   data() {
     return {
-      // value: 0,
       date: "",
-      // category_id: 1,
-      // description: "",
       rules: [value => value.length > 0 || "Can't be blank"],
-      // feedback: null,
       dialog: false
-      // accounts: [],
-      // categories: []
     };
   },
   computed: {
@@ -125,16 +86,13 @@ export default {
       return this.$store.getters.userId;
     }
   },
-  created() {
-    // this.account_id = this.accounts[0].id;
-  },
+  created() {},
   methods: {
     create() {
       if (this.$refs.form.validate()) {
         let formattedDate = this.date.split("-");
         let formattedYear = parseInt(formattedDate[0], 10);
         let formattedMonth = parseInt(formattedDate[1], 10);
-        // let formattedDay = parseInt(formattedDate[2], 10);
 
         const cycle = {
           year: formattedYear,
@@ -142,8 +100,6 @@ export default {
           current: true,
           user_id: this.user_id
         };
-
-        // this.setCurrent(this.user_id);
 
         axios
           .post("http://localhost:3000/cycles", {
@@ -156,40 +112,14 @@ export default {
               this.account_id = [];
 
               this.$emit("newCycle", res.data);
-              // this.$emit("activateSnackbar", {
-              //   value: true,
-              //   color: "success",
-              //   message: "Income successfuly created"
-              // });
-
-              // this.$store.commit("setAccount", res.data);
-              // this.$router.push({
-              //   name: "dashboard"
-              // });
             }
           })
           .catch(err => {
             console.log(err);
             this.dialog = false;
-            // this.$emit("activateSnackbar", {
-            //   value: true,
-            //   color: "error",
-            //   message: "Sorry, but we couldn't create your income"
-            // });
           });
-        // this.$emit("endCycle");
       }
     }
-    // setCurrent(id) {
-    //   axios
-    //     .post("http://localhost:3000/cycles/current", { id })
-    //     .then(res => {
-    //       console.log(res.data);
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     });
-    // }
   }
 };
 </script>

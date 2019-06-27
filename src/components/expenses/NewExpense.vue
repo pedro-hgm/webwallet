@@ -10,7 +10,9 @@
     </template>
     <v-card>
       <v-card-title>
-        <h2>New Expense</h2>
+        <v-layout justify-center row>
+          <h2 class="deep-orange--text">New Expense</h2>
+        </v-layout>
       </v-card-title>
       <v-card-text>
         <v-form class="px-3" ref="form">
@@ -21,7 +23,7 @@
             label="Value"
             v-model="value"
             prepend-icon="attach_money"
-            color="orange"
+            color="deep-orange"
           ></v-text-field>
           <v-menu
             :close-on-content-click="true"
@@ -36,7 +38,7 @@
             <template v-slot:activator="{ on }">
               <v-text-field
                 :rules="rules"
-                color="orange"
+                color="deep-orange"
                 v-model="date"
                 label="Date"
                 hint="YYYY/MM/DD format"
@@ -48,15 +50,13 @@
             </template>
             <v-date-picker :rules="rules" v-model="date" no-title></v-date-picker>
           </v-menu>
-          <v-textarea color="orange" prepend-icon="notes" label="Description" v-model="description"></v-textarea>
-          <!-- <v-select
-            prepend-icon="account_balance"
-            :items="accounts"
-            label="Account"
-            required
-            color="orange"
-            v-model="account_id"
-          ></v-select>-->
+          <v-textarea
+            color="deep-orange"
+            prepend-icon="notes"
+            label="Description"
+            v-model="description"
+          ></v-textarea>
+
           <v-container>
             <v-layout row justify-space-around>
               <v-flex xs6>
@@ -64,15 +64,17 @@
                   <v-icon class="mr-2">account_balance</v-icon>Account:
                 </h3>
 
-                <form
-                  :rules="rules"
-                  class="ml-4 my-2"
-                  v-for="account in accounts"
-                  :key="account.id"
-                >
-                  <input v-model="account_id" type="radio" :name="account.name" :value="account.id">
-                  <span class="ml-1 subheading grey--text font-weight-bold">{{ account.name }}</span>
-                  <br>
+                <form class="ml-4 my-2">
+                  <v-layout column>
+                    <v-radio-group
+                      v-for="account in accounts"
+                      :key="account.id"
+                      v-model="account_id"
+                      :mandatory="true"
+                    >
+                      <v-radio color="deep-orange" :label="account.name" :value="account.id"></v-radio>
+                    </v-radio-group>
+                  </v-layout>
                 </form>
               </v-flex>
 
@@ -81,27 +83,32 @@
                   <v-icon class="mr-2">category</v-icon>Category:
                 </h3>
 
-                <form
-                  :rules="rules"
-                  class="ml-4 my-2"
-                  v-for="category in categories"
-                  :key="category.id"
-                >
-                  <v-icon class="mr-2">{{category.icon}}</v-icon>
-                  <input
-                    v-model="category_id"
-                    type="radio"
-                    :name="category.name"
-                    :value="category.id"
-                  >
-                  <span class="ml-1 subheading grey--text font-weight-bold">{{ category.name }}</span>
-                  <br>
+                <form class="ml-4 my-2">
+                  <v-layout column>
+                    <v-radio-group
+                      v-for="category in categories"
+                      :key="category.id"
+                      v-model="category_id"
+                      :mandatory="true"
+                      :prepend-icon="category.icon"
+                    >
+                      <v-radio color="deep-orange" :label="category.name" :value="category.id"></v-radio>
+                    </v-radio-group>
+                  </v-layout>
                 </form>
               </v-flex>
             </v-layout>
           </v-container>
 
-          <v-btn @click="create" flat small color="orange" class="mx-0 mt-3">Create</v-btn>
+          <v-layout justify-center row>
+            <v-btn
+              @click="create"
+              depressed
+              small
+              color="deep-orange"
+              class="mx-0 mt-3 white--text"
+            >Create</v-btn>
+          </v-layout>
         </v-form>
       </v-card-text>
     </v-card>
@@ -122,8 +129,6 @@ export default {
       rules: [value => value.length > 0 || "Can't be blank"],
       feedback: null,
       dialog: false
-      // accounts: [],
-      // categories: []
     };
   },
   computed: {
@@ -133,25 +138,17 @@ export default {
     categories() {
       return this.$store.getters.getCategories;
     },
-    // account_id() {
-    //   return this.accounts[0].id;
-    // },
     user_id() {
       return this.$store.getters.userId;
     }
   },
   created() {
-    // this.accounts = this.$store.getters.getAccounts;
-    // console.log(this.accounts);
-    // this.categories = this.$store.getters.getCategories;
     this.account_id = this.accounts[0].id;
   },
   methods: {
     create() {
       if (this.$refs.form.validate()) {
         let formattedDate = this.date.split("-");
-        // formattedDate.pop();
-        // formattedDate = formattedDate.join("");
         let formattedYear = parseInt(formattedDate[0], 10);
         let formattedMonth = parseInt(formattedDate[1], 10);
         let formattedDay = parseInt(formattedDate[2], 10);
@@ -181,10 +178,6 @@ export default {
                 message: "Expense successfuly created"
               });
               this.$store.commit("newExpense", expense);
-              // this.$store.commit("setAccount", res.data);
-              // this.$router.push({
-              //   name: "dashboard"
-              // });
             }
           })
           .catch(err => {

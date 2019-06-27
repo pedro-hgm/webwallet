@@ -21,7 +21,9 @@
     </template>
     <v-card>
       <v-card-title>
-        <h2>New Account</h2>
+        <v-layout justify-center row>
+          <h2 class="indigo--text">New Account</h2>
+        </v-layout>
       </v-card-title>
       <v-card-text>
         <v-form class="px-3" ref="form">
@@ -52,7 +54,15 @@
             v-model="kind"
           ></v-select>
 
-          <v-btn @click="create" flat small color="indigo" class="mx-0 mt-3">Create</v-btn>
+          <v-layout justify-center row>
+            <v-btn
+              @click="create"
+              depressed
+              small
+              color="indigo"
+              class="mx-0 mt-3 white--text"
+            >Create</v-btn>
+          </v-layout>
         </v-form>
       </v-card-text>
     </v-card>

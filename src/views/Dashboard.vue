@@ -4,16 +4,16 @@
       <span>{{ snackbar.message }}</span>
       <v-btn color="white" flat @click="snackbar.value = false">Close</v-btn>
     </v-snackbar>
-    <div class="ml-5 mt-4">
+    <div class="mt-1">
       <p v-if="!hasAccount">Looks like you don't have an account yet, let's create one to start!</p>
-      <v-layout row wrap class="ml-5">
-        <v-flex xm12 lg4>
+      <v-layout justify-space-around row wrap>
+        <v-flex xs12 sm6 md4 lg3>
           <CurrentBalance v-if="hasAccount"/>
         </v-flex>
-        <v-flex xm12 lg4>
+        <v-flex xs12 sm6 md4 lg3>
           <CurrentIncomes v-if="hasAccount"/>
         </v-flex>
-        <v-flex xm12 lg4>
+        <v-flex xs12 sm6 md4 lg3>
           <CurrentExpenses v-if="hasAccount"/>
         </v-flex>
       </v-layout>
@@ -104,10 +104,6 @@ export default {
     });
   }
 };
-
-// TODO: complete the logic for managing current and older cycles, and the logic for ending one.
-
-// TODO: adjust the component to create a cycle to reflect the changes done in te logic of it
 
 // TODO: update the other forms to use the same layout as the cycle's form
 

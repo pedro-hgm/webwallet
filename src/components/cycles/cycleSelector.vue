@@ -21,8 +21,7 @@
                 v-model="selectedCycle"
                 :mandatory="true"
               >
-                <v-radio :value="cycle"></v-radio>
-                <span>{{ `${cycle.month} / ${cycle.year}` }}</span>
+                <v-radio :label="`${cycle.month} / ${cycle.year}`" :value="cycle"></v-radio>
               </v-radio-group>
             </v-layout>
           </v-container>
@@ -53,11 +52,7 @@ export default {
       dialog: false
     };
   },
-  computed: {
-    // cycles() {
-    //   return this.$store.getters.getCycles;
-    // }
-  },
+  computed: {},
   methods: {
     select(cycle) {
       this.dialog = false;

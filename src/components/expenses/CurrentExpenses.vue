@@ -1,19 +1,17 @@
 <template>
-  <div>
-    <v-card height="80px" max-width="250px">
-      <v-layout justify-space-around row wrap>
-        <v-flex xm6 class="my-2 ml-4">
-          <v-btn large flat icon color="red">
-            <v-icon color="red" large>trending_down</v-icon>
-          </v-btn>
+  <v-card class="text-xs-center ma-3 my-card">
+    <v-card-text>
+      <v-layout row wrap>
+        <v-flex xm6>
+          <v-icon large color="red" class="mb-2">trending_down</v-icon>
         </v-flex>
-        <v-flex xm6 class="my-3 mr-4">
+        <v-flex xm6>
           <h3 class="subheading grey--text">Monthly Expenses:</h3>
-          <h3 class="red--text">$ {{ currentExpenses }}</h3>
+          <div class="subheading red--text">$ {{ currentExpenses }}</div>
         </v-flex>
       </v-layout>
-    </v-card>
-  </div>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
@@ -76,4 +74,7 @@ export default {
 </script>
 
 <style scoped>
+.my-card {
+  border-radius: 20px;
+}
 </style>

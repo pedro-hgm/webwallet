@@ -21,7 +21,9 @@
     </template>
     <v-card>
       <v-card-title>
-        <h2>New Income</h2>
+        <v-layout justify-center row>
+          <h2 class="green--text">New Income</h2>
+        </v-layout>
       </v-card-title>
       <v-card-text>
         <v-form class="px-3" ref="form">
@@ -61,51 +63,26 @@
           </v-menu>
           <v-textarea color="green" prepend-icon="notes" label="Description" v-model="description"></v-textarea>
 
-          <v-container>
-            <v-layout row justify-space-around>
-              <v-flex xs12>
-                <h3 class="grey--text mb-2">
-                  <v-icon class="mr-2">account_balance</v-icon>Account:
-                </h3>
+          <v-select
+            :items="accounts"
+            v-model="account_id"
+            label="Accounts"
+            item-value="id"
+            item-text="name"
+            prepend-icon="account_balance"
+            color="green"
+            class="mt-2"
+          ></v-select>
 
-                <form
-                  :rules="rules"
-                  class="ml-4 my-2"
-                  v-for="account in accounts"
-                  :key="account.id"
-                >
-                  <input v-model="account_id" type="radio" :name="account.name" :value="account.id">
-                  <span class="ml-1 subheading grey--text font-weight-bold">{{ account.name }}</span>
-                  <br>
-                </form>
-              </v-flex>
-
-              <!-- <v-flex xs6>
-                <h3 class="grey--text mb-2">
-                  <v-icon class="mr-2">category</v-icon>Category:
-                </h3>
-
-                <form
-                  :rules="rules"
-                  class="ml-4 my-2"
-                  v-for="category in categories"
-                  :key="category.id"
-                >
-                  <v-icon class="mr-2">{{category.icon}}</v-icon>
-                  <input
-                    v-model="category_id"
-                    type="radio"
-                    :name="category.name"
-                    :value="category.id"
-                  >
-                  <span class="ml-1 subheading grey--text font-weight-bold">{{ category.name }}</span>
-                  <br>
-                </form>
-              </v-flex>-->
-            </v-layout>
-          </v-container>
-
-          <v-btn @click="create" flat small color="green" class="mx-0 mt-3">Create</v-btn>
+          <v-layout justify-center row>
+            <v-btn
+              @click="create"
+              depressed
+              small
+              color="green"
+              class="mx-0 mt-3 white--text"
+            >Create</v-btn>
+          </v-layout>
         </v-form>
       </v-card-text>
     </v-card>
@@ -121,41 +98,27 @@ export default {
       value: 0,
       date: "",
       account_id: "",
-      // category_id: 1,
       description: "",
       rules: [value => value.length > 0 || "Can't be blank"],
       feedback: null,
       dialog: false
-      // accounts: [],
-      // categories: []
     };
   },
   computed: {
     accounts() {
       return this.$store.getters.getAccounts;
     },
-    // categories() {
-    //   return this.$store.getters.getCategories;
-    // },
-    // account_id() {
-    //   return this.accounts[0].id;
-    // },
     user_id() {
       return this.$store.getters.userId;
     }
   },
   created() {
-    // this.accounts = this.$store.getters.getAccounts;
-    // console.log(this.accounts);
-    // this.categories = this.$store.getters.getCategories;
     this.account_id = this.accounts[0].id;
   },
   methods: {
     create() {
       if (this.$refs.form.validate()) {
         let formattedDate = this.date.split("-");
-        // formattedDate.pop();
-        // formattedDate = formattedDate.join("");
         let formattedYear = parseInt(formattedDate[0], 10);
         let formattedMonth = parseInt(formattedDate[1], 10);
         let formattedDay = parseInt(formattedDate[2], 10);
@@ -167,9 +130,9 @@ export default {
           day: formattedDay,
           description: this.description,
           account_id: this.account_id,
-          // category_id: this.category_id,
           user_id: this.user_id
         };
+        console.log(income);
         axios
           .post("http://localhost:3000/incomes", {
             income
@@ -185,10 +148,6 @@ export default {
                 message: "Income successfuly created"
               });
               this.$store.commit("newIncome", income);
-              // this.$store.commit("setAccount", res.data);
-              // this.$router.push({
-              //   name: "dashboard"
-              // });
             }
           })
           .catch(err => {

@@ -16,10 +16,10 @@
       <div>
         <v-layout v-if="currentCycle" justify-center row wrap>
           <v-flex xs12>
-            <v-alert v-model="snackbar" color="blue-grey" outline dismissible icon="new_releases">
+            <v-alert v-model="alert" color="blue-grey" outline dismissible icon="new_releases">
               <h5
                 class="subheading"
-              >This is the cycle's area. Here you can see all your cycles or create a new one. But remember, in order to create a new cycle you must end the current one first.</h5>
+              >This is the cycle's area. Here you can see all your cycles or create a new one. But remember, in order to create a new cycle you must end the current first.</h5>
             </v-alert>
           </v-flex>
         </v-layout>
@@ -31,10 +31,10 @@
               <v-card-text>
                 <v-layout row wrap>
                   <v-flex xm6>
-                    <v-icon large color="blue" class="mb-2">account_balance</v-icon>
+                    <v-icon large color="blue" class="mb-2">account_balance_wallet</v-icon>
                   </v-flex>
                   <v-flex xm6>
-                    <h3 class="subheading grey--text">Total Balance:</h3>
+                    <h3 class="subheading grey--text">Balance:</h3>
                     <div class="subheading blue--text">$ {{ totalBalance }}</div>
                   </v-flex>
                 </v-layout>
@@ -50,7 +50,7 @@
                     <v-icon large color="green" class="mb-2">trending_up</v-icon>
                   </v-flex>
                   <v-flex xm6>
-                    <h3 class="subheading grey--text">Total of Incomes:</h3>
+                    <h3 class="subheading grey--text">Incomes:</h3>
                     <div class="subheading green--text">$ {{ incomesTotalValue }}</div>
                   </v-flex>
                 </v-layout>
@@ -66,7 +66,7 @@
                     <v-icon large color="red" class="mb-2">trending_down</v-icon>
                   </v-flex>
                   <v-flex xm6>
-                    <h3 class="subheading grey--text">Total of Expenses:</h3>
+                    <h3 class="subheading grey--text">Expenses:</h3>
                     <div class="subheading red--text">$ {{ expensesTotalValue }}</div>
                   </v-flex>
                 </v-layout>
@@ -181,7 +181,7 @@ export default {
       activeCycleId: null,
       incomes: [],
       expenses: [],
-      snackbar: true
+      alert: true
     };
   },
   computed: {
@@ -309,7 +309,7 @@ export default {
   border-left: 4px solid tomato;
 }
 .income {
-  border-left: 4px solid lightgreen;
+  border-left: 4px solid #4caf50;
 }
 .my-card {
   border-radius: 20px;
