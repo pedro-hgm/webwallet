@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
-      <v-btn slot="activator" v-on="on" dark small color="blue-grey" class="mt-3">
+      <v-btn slot="activator" v-on="on" dark small color="blue-grey" class="mt-3 mb-5">
         <span>Select a cycle</span>
       </v-btn>
     </template>

@@ -14,7 +14,15 @@
         </v-container>
       </div>
       <div>
-        <h5>This is the cycle's area. Here you can see all your cycles or create a new one. But remember that to create a new cycle, you must end the current one first.</h5>
+        <v-layout v-if="currentCycle" justify-center row wrap>
+          <v-flex xs12>
+            <v-alert v-model="snackbar" color="blue-grey" outline dismissible icon="new_releases">
+              <h5
+                class="subheading"
+              >This is the cycle's area. Here you can see all your cycles or create a new one. But remember, in order to create a new cycle you must end the current one first.</h5>
+            </v-alert>
+          </v-flex>
+        </v-layout>
       </div>
       <v-container class="mt-1">
         <v-layout justify-space-around row wrap>
@@ -133,7 +141,7 @@
           dark
           small
           color="blue-grey"
-          class="mt-3"
+          class="mt-3 mb-5"
         >end cycle</v-btn>
       </v-layout>
 
@@ -172,13 +180,11 @@ export default {
       cycles: [],
       activeCycleId: null,
       incomes: [],
-      expenses: []
+      expenses: [],
+      snackbar: true
     };
   },
   computed: {
-    // cycles() {
-    //   return this.$store.getters.getCycles;
-    // },
     currentCycle() {
       if (this.cycles.length > 0) {
         let cycles = this.cycles;
@@ -195,12 +201,6 @@ export default {
         return false;
       }
     },
-    // incomes() {
-    //   return this.$store.getters.getCycleIncomes;
-    // },
-    // expenses() {
-    //   return this.$store.getters.getCycleExpenses;
-    // },
     expensesTotalValue() {
       if (this.expenses) {
         const expenses = this.expenses;
@@ -245,7 +245,6 @@ export default {
       axios
         .get(`http://localhost:3000/cycles/${this.$store.getters.userId}`)
         .then(res => {
-          // this.$store.commit("setCycle", res.data);
           this.cycles = [];
           this.cycles.push(...res.data);
         })
@@ -259,8 +258,6 @@ export default {
           id: id
         })
         .then(res => {
-          // this.$store.commit("setCycleIncomes", res.data[0]);
-          // this.$store.commit("setCycleExpenses", res.data[1]);
           this.incomes.push(...res.data[0]);
           this.expenses.push(...res.data[1]);
         })
@@ -275,16 +272,12 @@ export default {
       this.activeCycleId = payload.id;
     },
     endCycle() {
-      console.log(this.cycles);
       if (confirm("Are you sure?")) {
         axios
           .post("http://localhost:3000/cycles/current", {
             id: this.currentCycle.id
           })
           .then(res => {
-            console.log(res.data);
-            // this.$store.commit("setCycleIncomes", []);
-            // this.$store.commit("setCycleExpenses", []);
             this.incomes = [];
             this.expenses = [];
             this.activeCycleId = null;
@@ -308,9 +301,6 @@ export default {
       }
     }, 1000);
   }
-  // mounted() {
-  //   this.requestCycleValues(this.currentCycle.id);
-  // }
 };
 </script>
 
