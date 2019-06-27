@@ -6,10 +6,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state     : {
-		userLogin    : false,
-		userId       : null,
-		userAccounts : [],
-		categories   : null
+		userLogin       : false,
+		userId          : null,
+		userAccounts    : [],
+		categories      : null,
+		currentExpenses : null,
+		currentIncomes  : null,
+		userCycles      : [],
+		cycleIncomes    : [],
+		cycleExpenses   : []
 	},
 	plugins   : [ createPersistedState() ],
 	mutations : {
@@ -29,6 +34,36 @@ export default new Vuex.Store({
 		},
 		newAccount(state, payload) {
 			state.userAccounts.push(payload);
+		},
+		setCurrentExpenses(state, payload) {
+			state.currentExpenses = [];
+			state.currentExpenses.push(...payload);
+		},
+		newExpense(state, payload) {
+			state.currentExpenses.push(payload);
+		},
+		setCurrentIncomes(state, payload) {
+			state.currentIncomes = [];
+			state.currentIncomes.push(...payload);
+		},
+		newIncome(state, payload) {
+			state.currentIncome.push(payload);
+		},
+		setCycle(state, payload) {
+			state.userCycles = [];
+			state.userCycles.push(...payload);
+		},
+		newCycle(state, payload) {
+			state.userCycles[state.userCycles.length - 1].current = false;
+			state.userCycles.push(payload);
+		},
+		setCycleIncomes(state, payload) {
+			state.cycleIncomes = [];
+			state.cycleIncomes.push(...payload);
+		},
+		setCycleExpenses(state, payload) {
+			state.cycleExpenses = [];
+			state.cycleExpenses.push(...payload);
 		}
 	},
 	actions   : {},
@@ -44,6 +79,21 @@ export default new Vuex.Store({
 		},
 		getCategories(state) {
 			return state.categories;
+		},
+		getCurrentExpenses(state) {
+			return state.currentExpenses;
+		},
+		getCurrentIncomes(state) {
+			return state.currentIncomes;
+		},
+		getCycles(state) {
+			return state.userCycles;
+		},
+		getCycleExpenses(state) {
+			return state.cycleExpenses;
+		},
+		getCycleIncomes(state) {
+			return state.cycleIncomes;
 		}
 	}
 });

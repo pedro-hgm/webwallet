@@ -15,15 +15,19 @@
       </v-btn>
     </v-toolbar>
 
-    <v-navigation-drawer app v-model="drawer" class="blue-grey darken-4">
+    <v-navigation-drawer mini-variant app v-model="drawer" class="blue-grey darken-4">
       <v-list class="mt-5">
         <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
-          <v-list-tile-action>
-            <v-icon class="white--text">{{ link.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title class="white--text">{{ link.text }}</v-list-tile-title>
-          </v-list-tile-content>
+          <v-tooltip right>
+            <template v-slot:activator="{ on }">
+              <v-list-tile-action>
+                <v-icon v-on="on" class="white--text">{{ link.icon }}</v-icon>
+              </v-list-tile-action>
+            </template>
+            <span>{{ link.text }}</span>
+          </v-tooltip>
+          <!-- <v-list-tile-title class="white--text">{{ link.text }}</v-list-tile-title>
+          <v-list-tile-content></v-list-tile-content>-->
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
@@ -31,7 +35,7 @@
 </template>
 
 <script>
-import Login from "@/components/Login.vue";
+import Login from "@/components/user/Login.vue";
 export default {
   components: { Login },
   data() {
@@ -39,8 +43,8 @@ export default {
       drawer: false,
       links: [
         { icon: "dashboard", text: "Dashboard", route: "/dashboard" },
-        { icon: "folder", text: "My Projects", route: "/projects" },
-        { icon: "person", text: "Team", route: "/team" }
+        { icon: "restore", text: "My Cycles", route: "/cycles" },
+        { icon: "bar_chart", text: "Reports", route: "/reports" }
       ],
       snackbar: false,
       email: null

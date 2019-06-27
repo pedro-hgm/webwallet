@@ -178,11 +178,13 @@ export default {
             console.log(res);
             if (res.status === 201) {
               this.dialog = false;
+              this.setBalance(this.account_id, income.value);
               this.$emit("activateSnackbar", {
                 value: true,
                 color: "success",
                 message: "Income successfuly created"
               });
+              this.$store.commit("newIncome", income);
               // this.$store.commit("setAccount", res.data);
               // this.$router.push({
               //   name: "dashboard"
@@ -201,6 +203,17 @@ export default {
         this.value = 0;
         this.description = "";
       }
+    },
+    setBalance(id, value) {
+      value = parseFloat(value);
+      axios
+        .post("http://localhost:3000/accounts/set_balance", { id, value })
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
