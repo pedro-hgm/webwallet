@@ -2,27 +2,16 @@
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
       <v-tooltip left>
-        <v-btn
-          slot="activator"
-          v-on="on"
-          fixed
-          bottom
-          right
-          fab
-          dark
-          small
-          color="green"
-          class="btn"
-        >
-          <v-icon>trending_up</v-icon>
+        <v-btn slot="activator" v-on="on" fixed bottom right icon dark small class="btn">
+          <v-icon large color="green darken-1">trending_up</v-icon>
         </v-btn>
-        <span>Add a new Income</span>
+        <span>New Income</span>
       </v-tooltip>
     </template>
     <v-card>
       <v-card-title>
         <v-layout justify-center row>
-          <h2 class="green--text">New Income</h2>
+          <h2 class="grey--text">New Income</h2>
         </v-layout>
       </v-card-title>
       <v-card-text>
@@ -34,7 +23,7 @@
             label="Value"
             v-model="value"
             prepend-icon="attach_money"
-            color="green"
+            color="green darken-1"
           ></v-text-field>
           <v-menu
             :close-on-content-click="true"
@@ -49,7 +38,7 @@
             <template v-slot:activator="{ on }">
               <v-text-field
                 :rules="rules"
-                color="green"
+                color="green darken-1"
                 v-model="date"
                 label="Date"
                 hint="YYYY/MM/DD format"
@@ -61,7 +50,12 @@
             </template>
             <v-date-picker :rules="rules" v-model="date" no-title></v-date-picker>
           </v-menu>
-          <v-textarea color="green" prepend-icon="notes" label="Description" v-model="description"></v-textarea>
+          <v-textarea
+            color="green darken-1"
+            prepend-icon="notes"
+            label="Description"
+            v-model="description"
+          ></v-textarea>
 
           <v-select
             :items="accounts"
@@ -70,7 +64,7 @@
             item-value="id"
             item-text="name"
             prepend-icon="account_balance"
-            color="green"
+            color="green darken-1"
             class="mt-2"
           ></v-select>
 
@@ -79,7 +73,7 @@
               @click="create"
               depressed
               small
-              color="green"
+              color="green darken-1"
               class="mx-0 mt-3 white--text"
             >Create</v-btn>
           </v-layout>

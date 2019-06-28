@@ -105,38 +105,15 @@ export default {
   }
 };
 
-// TODO: update the other forms to use the same layout as the cycle's form
-
-// TODO: change the income/expense form to us v-select
-
-// TODO: validate all the forms using v-select
-
-// TODO: show in the dashboard top part three cards:
-
 // TODO: the pages (routes) of the app:
 // I thinking of the following main pages:
 // * dashboard - work in progress:
-// basically missing the things said above
-// and some UX, UI adjustments like links, icons, etc
+// basically missing the charts
 // * accounts - not created yet:
 // a place to see and manage all your accounts
 // * reports - not created yet:
 //the place where the user data is displayed in charts
-// * cycles - work in progress:
-// a place to manage and see all of your cycles,
-// the current and the previous
-// here you can end a cycle by clicking a button who fires a function
-// that set the last cycle in your database to false
-// therefore it should also update the state in some way
-// here the user should also be able to create a new cycle
-// since the component for creating a new one should be present
-// in more than one route, it should be made in a way that is possible to
-// be nested in multiple components,
-// but it only should show up in the dashboard if the user has no cycle
-// or at least no active one
-// also an user shouldn't be able to create a new cycle if he has an active
-// cycle already, because if he does, than once i try to get the current
-// cycle to display on the dashboard, it would mess the things up
+// * cycles - completed:
 
 // TODO: think about the possibility of moving the snackbar utility
 // to the navbar, therefore using it in other places of the app than only
@@ -144,6 +121,10 @@ export default {
 // state properties, getters, mutations, etc
 
 // TODO: adjust the navbar for smaller screens
+
+// TODO: think about changing the color pallet for some components, like using more pale colors to match the greyish of the app in general
+
+// TODO: time ? study more about axios and async/await : move on
 
 // ! last but not least, be aware of the power of computed properties
 </script>

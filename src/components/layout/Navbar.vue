@@ -26,8 +26,6 @@
             </template>
             <span>{{ link.text }}</span>
           </v-tooltip>
-          <!-- <v-list-tile-title class="white--text">{{ link.text }}</v-list-tile-title>
-          <v-list-tile-content></v-list-tile-content>-->
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
@@ -44,7 +42,8 @@ export default {
       links: [
         { icon: "dashboard", text: "Dashboard", route: "/dashboard" },
         { icon: "restore", text: "My Cycles", route: "/cycles" },
-        { icon: "bar_chart", text: "Reports", route: "/reports" }
+        { icon: "bar_chart", text: "Reports", route: "/reports" },
+        { icon: "account_balance", text: "Accounts", route: "/accounts" }
       ],
       snackbar: false,
       email: null

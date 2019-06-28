@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Dashboard from './views/Dashboard.vue';
 import Cycles from '@/views/Cycles.vue';
+import Accounts from '@/views/Accounts.vue';
 
 Vue.use(Router);
 
@@ -24,6 +25,11 @@ export default new Router({
 			path      : '/cycles',
 			name      : 'cycles',
 			component : Cycles
+		},
+		{
+			path      : '/accounts',
+			name      : 'accounts',
+			component : Accounts
 		}
 	]
 });

@@ -2,16 +2,16 @@
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
       <v-tooltip left>
-        <v-btn slot="activator" v-on="on" fixed bottom right fab dark small color="red" class="btn">
-          <v-icon>trending_down</v-icon>
+        <v-btn slot="activator" v-on="on" fixed bottom right icon dark small class="btn">
+          <v-icon large color="red darken-1">trending_down</v-icon>
         </v-btn>
-        <span>Add a new Expense</span>
+        <span>New Expense</span>
       </v-tooltip>
     </template>
     <v-card>
       <v-card-title>
         <v-layout justify-center row>
-          <h2 class="deep-orange--text">New Expense</h2>
+          <h2 class="grey--text">New Expense</h2>
         </v-layout>
       </v-card-title>
       <v-card-text>
@@ -23,7 +23,7 @@
             label="Value"
             v-model="value"
             prepend-icon="attach_money"
-            color="deep-orange"
+            color="red darken-2"
           ></v-text-field>
           <v-menu
             :close-on-content-click="true"
@@ -38,7 +38,7 @@
             <template v-slot:activator="{ on }">
               <v-text-field
                 :rules="rules"
-                color="deep-orange"
+                color="red darken-2"
                 v-model="date"
                 label="Date"
                 hint="YYYY/MM/DD format"
@@ -51,7 +51,7 @@
             <v-date-picker :rules="rules" v-model="date" no-title></v-date-picker>
           </v-menu>
           <v-textarea
-            color="deep-orange"
+            color="red darken-2"
             prepend-icon="notes"
             label="Description"
             v-model="description"
@@ -72,7 +72,7 @@
                       v-model="account_id"
                       :mandatory="true"
                     >
-                      <v-radio color="deep-orange" :label="account.name" :value="account.id"></v-radio>
+                      <v-radio color="red darken-2" :label="account.name" :value="account.id"></v-radio>
                     </v-radio-group>
                   </v-layout>
                 </form>
@@ -92,7 +92,7 @@
                       :mandatory="true"
                       :prepend-icon="category.icon"
                     >
-                      <v-radio color="deep-orange" :label="category.name" :value="category.id"></v-radio>
+                      <v-radio color="red darken-2" :label="category.name" :value="category.id"></v-radio>
                     </v-radio-group>
                   </v-layout>
                 </form>
@@ -105,7 +105,7 @@
               @click="create"
               depressed
               small
-              color="deep-orange"
+              color="red darken-2"
               class="mx-0 mt-3 white--text"
             >Create</v-btn>
           </v-layout>

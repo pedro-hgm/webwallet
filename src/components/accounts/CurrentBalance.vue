@@ -3,11 +3,11 @@
     <v-card-text>
       <v-layout row wrap>
         <v-flex xm6>
-          <v-icon large color="blue" class="mb-2">account_balance_wallet</v-icon>
+          <v-icon large color="indigo darken-1" class="mb-2">account_balance_wallet</v-icon>
         </v-flex>
         <v-flex xm6>
           <h3 class="subheading grey--text">Current Balance:</h3>
-          <div class="subheading blue--text">$ {{ currentBalance }}</div>
+          <div class="subheading indigo--text">$ {{ currentBalance }}</div>
         </v-flex>
       </v-layout>
     </v-card-text>

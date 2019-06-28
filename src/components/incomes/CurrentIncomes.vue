@@ -3,7 +3,7 @@
     <v-card-text>
       <v-layout row wrap>
         <v-flex xm6>
-          <v-icon large color="green" class="mb-2">trending_up</v-icon>
+          <v-icon large color="green darken-1" class="mb-2">trending_up</v-icon>
         </v-flex>
         <v-flex xm6>
           <h3 class="subheading grey--text">Monthly Incomes:</h3>
