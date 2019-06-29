@@ -19,18 +19,51 @@
       </v-layout>
     </div>
 
-    <v-layout justify-space-around row wrap class="mt-5">
-      <v-flex xs12 md5>
+    <v-layout justify-space-around row wrap class="my-5">
+      <v-flex xs12 md5 class="mb-3">
         <Balance />
       </v-flex>
-      <v-flex xs12 md5>
-        <v-img class="mt-3" src="undraw_investing_7u74.svg " alt="wallet"></v-img>
+      <v-flex xs12 md5 class="mb3">
+        <Categories />
+        <!-- <v-img class="mt-3" src="undraw_charts_jj6t.svg" alt="wallet"></v-img> -->
       </v-flex>
     </v-layout>
 
-    <NewIncome v-if="hasAccount" @activateSnackbar="Snackbar" />
-    <NewExpense v-if="hasAccount" @activateSnackbar="Snackbar" />
-    <NewAccount @activateSnackbar="Snackbar" />
+    <v-layout class="btns" justify-space-around row wrap>
+      <v-spacer></v-spacer>
+      <v-flex xs4>
+        <v-card class="text-xs-center ma-2 my-card">
+          <v-card-text>
+            <v-layout class="mb-1" row wrap>
+              <v-flex xm4>
+                <NewAccount @activateSnackbar="Snackbar" />
+              </v-flex>
+              <v-flex xm4>
+                <NewIncome v-if="hasAccount" @activateSnackbar="Snackbar" />
+              </v-flex>
+              <v-flex xm4>
+                <NewExpense v-if="hasAccount" @activateSnackbar="Snackbar" />
+              </v-flex>
+            </v-layout>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+      <v-spacer></v-spacer>
+    </v-layout>
+    <!-- <v-layout class="text-xs-center btns" justify-space-around row> -->
+
+    <!-- <v-spacer></v-spacer>
+      <v-flex xs2 sm1>
+        <NewAccount @activateSnackbar="Snackbar" />
+      </v-flex>
+      <v-flex xs2 sm1>
+        <NewIncome v-if="hasAccount" @activateSnackbar="Snackbar" />
+      </v-flex>
+      <v-flex xs2 sm1>
+        <NewExpense v-if="hasAccount" @activateSnackbar="Snackbar" />
+      </v-flex>
+    <v-spacer></v-spacer>-->
+    <!-- </v-layout> -->
   </v-container>
 </template>
 
@@ -43,6 +76,7 @@ import CurrentBalance from "@/components/accounts/CurrentBalance.vue";
 import CurrentIncomes from "@/components/incomes/CurrentIncomes.vue";
 import CurrentExpenses from "@/components/expenses/CurrentExpenses.vue";
 import Balance from "@/components/charts/Balance.vue";
+import Categories from "@/components/charts/Categories.vue";
 
 export default {
   name: "Dashboard",
@@ -53,7 +87,8 @@ export default {
     CurrentBalance,
     CurrentIncomes,
     CurrentExpenses,
-    Balance
+    Balance,
+    Categories
   },
   computed: {
     hasAccount() {
@@ -146,5 +181,15 @@ export default {
 // ! last but not least, be aware of the power of computed properties
 </script>
 
-<style>
+<style scoped>
+.btns {
+  margin-top: 6em;
+}
+.my-card {
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  -moz-box-shadow: 2px 2px 2px 2px #ccc;
+  -webkit-box-shadow: 2px 2px 2px 2px #ccc;
+  box-shadow: 2px 2px 2px 2px #ccc;
+}
 </style>

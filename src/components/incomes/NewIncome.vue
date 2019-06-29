@@ -1,9 +1,9 @@
 <template>
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
-      <v-tooltip left>
-        <v-btn slot="activator" v-on="on" fixed bottom right icon dark small class="btn">
-          <v-icon large color="green darken-1">trending_up</v-icon>
+      <v-tooltip top>
+        <v-btn slot="activator" v-on="on" icon dark small class="btn">
+          <v-icon large color="#81C784">trending_up</v-icon>
         </v-btn>
         <span>New Income</span>
       </v-tooltip>
@@ -23,7 +23,7 @@
             label="Value"
             v-model="value"
             prepend-icon="attach_money"
-            color="green darken-1"
+            color="#81C784"
           ></v-text-field>
           <v-menu
             :close-on-content-click="true"
@@ -38,7 +38,7 @@
             <template v-slot:activator="{ on }">
               <v-text-field
                 :rules="rules"
-                color="green darken-1"
+                color="#81C784"
                 v-model="date"
                 label="Date"
                 hint="YYYY/MM/DD format"
@@ -51,7 +51,7 @@
             <v-date-picker :rules="rules" v-model="date" no-title></v-date-picker>
           </v-menu>
           <v-textarea
-            color="green darken-1"
+            color="#81C784"
             prepend-icon="notes"
             label="Description"
             v-model="description"
@@ -64,7 +64,7 @@
             item-value="id"
             item-text="name"
             prepend-icon="account_balance"
-            color="green darken-1"
+            color="#81C784"
             class="mt-2"
           ></v-select>
 
@@ -73,7 +73,7 @@
               @click="create"
               depressed
               small
-              color="green darken-1"
+              color="#81C784"
               class="mx-0 mt-3 white--text"
             >Create</v-btn>
           </v-layout>
@@ -174,8 +174,8 @@ export default {
 
 <style scoped>
 .btn {
-  margin-bottom: 140px;
-  margin-right: 20px;
+  /* margin-bottom: 140px; */
+  /* margin-right: 20px; */
 }
 </style>
 

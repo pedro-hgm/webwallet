@@ -132,7 +132,11 @@ export default {
   max-width: 600px;
   height: 400px;
   margin: 15% auto; */
-  border-radius: 30px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  -moz-box-shadow: 2px 2px 2px 2px #ccc;
+  -webkit-box-shadow: 2px 2px 2px 2px #ccc;
+  box-shadow: 2px 2px 2px 2px #ccc;
 }
 </style>
 

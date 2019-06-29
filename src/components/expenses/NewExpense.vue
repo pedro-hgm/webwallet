@@ -1,9 +1,9 @@
 <template>
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
-      <v-tooltip left>
-        <v-btn slot="activator" v-on="on" fixed bottom right icon dark small class="btn">
-          <v-icon large color="red darken-1">trending_down</v-icon>
+      <v-tooltip top>
+        <v-btn slot="activator" v-on="on" icon dark small class="btn">
+          <v-icon large color="#E57373">trending_down</v-icon>
         </v-btn>
         <span>New Expense</span>
       </v-tooltip>
@@ -23,7 +23,7 @@
             label="Value"
             v-model="value"
             prepend-icon="attach_money"
-            color="red darken-2"
+            color="#E57373"
           ></v-text-field>
           <v-menu
             :close-on-content-click="true"
@@ -38,7 +38,7 @@
             <template v-slot:activator="{ on }">
               <v-text-field
                 :rules="rules"
-                color="red darken-2"
+                color="#E57373"
                 v-model="date"
                 label="Date"
                 hint="YYYY/MM/DD format"
@@ -51,7 +51,7 @@
             <v-date-picker :rules="rules" v-model="date" no-title></v-date-picker>
           </v-menu>
           <v-textarea
-            color="red darken-2"
+            color="#E57373"
             prepend-icon="notes"
             label="Description"
             v-model="description"
@@ -72,7 +72,7 @@
                       v-model="account_id"
                       :mandatory="true"
                     >
-                      <v-radio color="red darken-2" :label="account.name" :value="account.id"></v-radio>
+                      <v-radio color="#E57373" :label="account.name" :value="account.id"></v-radio>
                     </v-radio-group>
                   </v-layout>
                 </form>
@@ -92,7 +92,7 @@
                       :mandatory="true"
                       :prepend-icon="category.icon"
                     >
-                      <v-radio color="red darken-2" :label="category.name" :value="category.id"></v-radio>
+                      <v-radio color="#E57373" :label="category.name" :value="category.id"></v-radio>
                     </v-radio-group>
                   </v-layout>
                 </form>
@@ -105,7 +105,7 @@
               @click="create"
               depressed
               small
-              color="red darken-2"
+              color="#E57373"
               class="mx-0 mt-3 white--text"
             >Create</v-btn>
           </v-layout>
@@ -210,8 +210,8 @@ export default {
 
 <style scoped>
 .btn {
-  margin-bottom: 90px;
-  margin-right: 20px;
+  /* margin-bottom: 90px; */
+  /* margin-right: 20px; */
 }
 </style>
 

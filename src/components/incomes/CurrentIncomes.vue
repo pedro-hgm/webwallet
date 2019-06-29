@@ -3,11 +3,11 @@
     <v-card-text>
       <v-layout row wrap>
         <v-flex xm6>
-          <v-icon large color="green darken-1" class="mb-2">trending_up</v-icon>
+          <v-icon large color="#81C784" class="mb-2">trending_up</v-icon>
         </v-flex>
         <v-flex xm6>
           <h3 class="subheading grey--text">Monthly Incomes:</h3>
-          <div class="subheading green--text">$ {{ currentIncomes }}</div>
+          <div class="subheading text">$ {{ currentIncomes }}</div>
         </v-flex>
       </v-layout>
     </v-card-text>
@@ -76,5 +76,9 @@ export default {
 <style scoped>
 .my-card {
   border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.text {
+  color: #81c784;
 }
 </style>

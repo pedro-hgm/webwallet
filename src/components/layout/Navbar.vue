@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-toolbar app flat color="grey lighten-2">
+    <v-toolbar app flat color="#E0E0E0">
       <v-toolbar-side-icon v-if="userLogin" @click="drawer = !drawer" class="black--text"></v-toolbar-side-icon>
       <v-toolbar-title class="text-uppercase black--text">
         <span class="font-weight-light">web</span>
@@ -8,7 +8,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <p v-if="email" class="mt-3 subheading">{{ email }}</p>
-      <Login v-if="!userLogin"/>
+      <Login v-if="!userLogin" />
       <v-btn v-else @click="logout" flat color="black">
         <span>Logout</span>
         <v-icon right>exit_to_app</v-icon>

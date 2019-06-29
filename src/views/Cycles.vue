@@ -10,7 +10,7 @@
               >You don't have any active cycles at the moment! Select an older cycle or create a new one.</h5>
             </v-flex>
           </v-layout>
-          <NewCycle/>
+          <NewCycle />
         </v-container>
       </div>
       <div>
@@ -31,11 +31,11 @@
               <v-card-text>
                 <v-layout row wrap>
                   <v-flex xm6>
-                    <v-icon large color="blue" class="mb-2">account_balance_wallet</v-icon>
+                    <v-icon large color="#5C6BC0" class="mb-2">account_balance_wallet</v-icon>
                   </v-flex>
                   <v-flex xm6>
                     <h3 class="subheading grey--text">Balance:</h3>
-                    <div class="subheading blue--text">$ {{ totalBalance }}</div>
+                    <div class="subheading text-balance">$ {{ totalBalance }}</div>
                   </v-flex>
                 </v-layout>
               </v-card-text>
@@ -47,11 +47,11 @@
               <v-card-text>
                 <v-layout row wrap>
                   <v-flex xm6>
-                    <v-icon large color="green" class="mb-2">trending_up</v-icon>
+                    <v-icon large color="#81c784" class="mb-2">trending_up</v-icon>
                   </v-flex>
                   <v-flex xm6>
                     <h3 class="subheading grey--text">Incomes:</h3>
-                    <div class="subheading green--text">$ {{ incomesTotalValue }}</div>
+                    <div class="subheading text-income">$ {{ incomesTotalValue }}</div>
                   </v-flex>
                 </v-layout>
               </v-card-text>
@@ -63,11 +63,11 @@
               <v-card-text>
                 <v-layout row wrap>
                   <v-flex xm6>
-                    <v-icon large color="red" class="mb-2">trending_down</v-icon>
+                    <v-icon large color="#E57373" class="mb-2">trending_down</v-icon>
                   </v-flex>
                   <v-flex xm6>
                     <h3 class="subheading grey--text">Expenses:</h3>
-                    <div class="subheading red--text">$ {{ expensesTotalValue }}</div>
+                    <div class="subheading text-expense">$ {{ expensesTotalValue }}</div>
                   </v-flex>
                 </v-layout>
               </v-card-text>
@@ -134,7 +134,7 @@
         </v-card>
       </v-container>
       <v-layout justify-center row>
-        <CycleSelector :cycles="this.cycles" @cycleSelected="findCycle"/>
+        <CycleSelector :cycles="this.cycles" @cycleSelected="findCycle" />
         <v-btn
           v-if="currentCycle.id === activeCycleId"
           @click="endCycle"
@@ -145,7 +145,7 @@
         >end cycle</v-btn>
       </v-layout>
 
-      <NewCycle v-if="!currentCycle" @newCycle="requestCycles"/>
+      <NewCycle v-if="!currentCycle" @newCycle="requestCycles" />
     </div>
     <div v-else>
       <v-container>
@@ -162,7 +162,7 @@
             >To create a new cycle you just have to click the buttom on the bottom right of your screen.</h5>
           </v-flex>
         </v-layout>
-        <NewCycle/>
+        <NewCycle />
       </v-container>
     </div>
   </div>
@@ -306,12 +306,31 @@ export default {
 
 <style scoped>
 .expense {
-  border-left: 4px solid tomato;
+  border-left: 4px solid #e57373;
 }
 .income {
-  border-left: 4px solid #4caf50;
+  border-left: 4px solid #81c784;
 }
 .my-card {
   border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  -moz-box-shadow: 2px 2px 2px 2px #ccc;
+  -webkit-box-shadow: 2px 2px 2px 2px #ccc;
+  box-shadow: 2px 2px 2px 2px #ccc;
+}
+.text-expense {
+  color: #e57373;
+}
+.text-income {
+  color: #81c784;
+}
+.text-balance {
+  color: #5c6bc0;
+}
+.transparent {
+  /* zoom: 1;
+  filter: alpha(opacity=50); */
+  /* opacity: 0.8; */
+  /* background-color: transparent; */
 }
 </style>

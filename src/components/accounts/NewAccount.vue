@@ -1,9 +1,9 @@
 <template>
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
-      <v-tooltip left>
-        <v-btn slot="activator" v-on="on" fixed bottom right icon dark small class="btn">
-          <v-icon large color="indigo darken-1">account_balance</v-icon>
+      <v-tooltip top>
+        <v-btn slot="activator" v-on="on" icon dark small class="btn">
+          <v-icon large color="#5C6BC0">account_balance</v-icon>
         </v-btn>
         <span>New Account</span>
       </v-tooltip>
@@ -21,7 +21,7 @@
             v-model="name"
             prepend-icon="assignment"
             :rules="rules"
-            color="indigo"
+            color="#5C6BC0"
           ></v-text-field>
           <v-text-field
             label="Initial balance"
@@ -31,7 +31,7 @@
             min="0"
             prepend-icon="attach_money"
             :rules="rules"
-            color="indigo darken-1"
+            color="#5C6BC0"
           ></v-text-field>
           <v-select
             prepend-icon="account_balance"
@@ -39,7 +39,7 @@
             :rules="rules"
             label="Type"
             required
-            color="indigo darken-1"
+            color="#5C6BC0"
             v-model="kind"
           ></v-select>
 
@@ -48,7 +48,7 @@
               @click="create"
               depressed
               small
-              color="indigo darken-1"
+              color="#5C6BC0"
               class="mx-0 mt-3 white--text"
             >Create</v-btn>
           </v-layout>
@@ -123,8 +123,8 @@ export default {
 
 <style scoped>
 .btn {
-  margin-bottom: 40px;
-  margin-right: 20px;
+  /* margin-bottom: 40px; */
+  /* margin-right: 20px; */
 }
 </style>
 
