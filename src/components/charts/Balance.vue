@@ -55,8 +55,7 @@ export default {
         title: {
           text: "Accounts balance shares",
           style: {
-            color: "grey",
-            fontWeight: "bold",
+            color: "#9E9E9E",
             fontSize: "2.5em"
           }
         },
@@ -93,12 +92,13 @@ export default {
 <style>
 @import "https://code.highcharts.com/5.0.0/css/highcharts.css";
 
-/* #container-for-categories {
-  min-width: 310px;
+#container-for-balance {
+  /* min-width: 310px;
   max-width: 600px;
   height: 400px;
-  margin: 15% auto;
-} */
+  margin: 15% auto; */
+  border-radius: 30px;
+}
 </style>
 
 

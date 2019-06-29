@@ -8,20 +8,29 @@
       <p v-if="!hasAccount">Looks like you don't have an account yet, let's create one to start!</p>
       <v-layout justify-space-around row wrap>
         <v-flex xs12 sm6 md4 lg3>
-          <CurrentBalance v-if="hasAccount"/>
+          <CurrentBalance v-if="hasAccount" />
         </v-flex>
         <v-flex xs12 sm6 md4 lg3>
-          <CurrentIncomes v-if="hasAccount"/>
+          <CurrentIncomes v-if="hasAccount" />
         </v-flex>
         <v-flex xs12 sm6 md4 lg3>
-          <CurrentExpenses v-if="hasAccount"/>
+          <CurrentExpenses v-if="hasAccount" />
         </v-flex>
       </v-layout>
     </div>
 
-    <NewIncome v-if="hasAccount" @activateSnackbar="Snackbar"/>
-    <NewExpense v-if="hasAccount" @activateSnackbar="Snackbar"/>
-    <NewAccount @activateSnackbar="Snackbar"/>
+    <v-layout justify-space-around row wrap class="mt-5">
+      <v-flex xs12 md5>
+        <Balance />
+      </v-flex>
+      <v-flex xs12 md5>
+        <v-img class="mt-3" src="undraw_investing_7u74.svg " alt="wallet"></v-img>
+      </v-flex>
+    </v-layout>
+
+    <NewIncome v-if="hasAccount" @activateSnackbar="Snackbar" />
+    <NewExpense v-if="hasAccount" @activateSnackbar="Snackbar" />
+    <NewAccount @activateSnackbar="Snackbar" />
   </v-container>
 </template>
 
@@ -33,6 +42,7 @@ import NewIncome from "@/components/incomes/NewIncome.vue";
 import CurrentBalance from "@/components/accounts/CurrentBalance.vue";
 import CurrentIncomes from "@/components/incomes/CurrentIncomes.vue";
 import CurrentExpenses from "@/components/expenses/CurrentExpenses.vue";
+import Balance from "@/components/charts/Balance.vue";
 
 export default {
   name: "Dashboard",
@@ -42,7 +52,8 @@ export default {
     NewIncome,
     CurrentBalance,
     CurrentIncomes,
-    CurrentExpenses
+    CurrentExpenses,
+    Balance
   },
   computed: {
     hasAccount() {

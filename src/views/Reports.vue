@@ -6,7 +6,7 @@
       </v-flex>
       <!-- <v-spacer></v-spacer> -->
       <v-flex xs12 md5 class="mb-5">
-        <Balance />
+        <Transactions />
       </v-flex>
     </v-layout>
   </div>
@@ -14,12 +14,12 @@
 
 
 <script>
-import Categories from "@/components/reports/CategoriesChart.vue";
-import Balance from "@/components/reports/BalanceChart.vue";
+import Categories from "@/components/charts/Categories.vue";
+import Transactions from "@/components/charts/Transactions.vue";
 
 export default {
   name: "Reports",
-  components: { Categories, Balance },
+  components: { Categories, Transactions },
   data() {
     return {};
   },

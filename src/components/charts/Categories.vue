@@ -14,15 +14,15 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      list: state => state.list
-    })
+    // ...mapState({
+    //   list: state => state.list
+    // })
   },
 
   watch: {
-    list() {
-      this.dataSource();
-    }
+    // list() {
+    //   this.dataSource();
+    // }
   },
   methods: {
     requestChartData() {
@@ -59,15 +59,15 @@ export default {
         title: {
           text: "Expenses by Categories",
           style: {
-            color: "grey",
-            fontWeight: "bold",
+            color: "#9E9E9E",
+
             fontSize: "2.5em"
           }
         },
         subtitle: {
           text: "Source: WebWallet.com",
           style: {
-            color: "grey",
+            color: "#9E9E9E",
             fontSize: "1.5em"
           }
         },
@@ -127,12 +127,13 @@ export default {
 <style>
 @import "https://code.highcharts.com/5.0.0/css/highcharts.css";
 
-/* #container-for-categories {
-  min-width: 310px;
+#container-for-categories {
+  /* min-width: 310px;
   max-width: 600px;
   height: 400px;
-  margin: 15% auto;
-} */
+  margin: 15% auto; */
+  border-radius: 30px;
+}
 </style>
 
 
