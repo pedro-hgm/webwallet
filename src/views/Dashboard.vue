@@ -105,14 +105,20 @@ export default {
   }
 };
 
+// * Review the data atualization when something changes. This check must be done for all components. There are a lot of stuff to fix, like the creation of new expenses and incomes and the update in the dashboard, accounts etc and a lot more
+
 // TODO: the pages (routes) of the app:
 // I thinking of the following main pages:
 // * dashboard - work in progress:
 // basically missing the charts
-// * accounts - not created yet:
-// a place to see and manage all your accounts
-// * reports - not created yet:
-//the place where the user data is displayed in charts
+// the charts should be some sort of overwall summary
+// maybe instead of repeating the cards from the cycle, the current elements could be an chart with the current balance and the monthly incomes/expenses
+// * accounts - work in progress
+// just missing the ability to delete accounts,
+// the problem is how this action is going to affect other components that work with accounts
+// * reports - work in progress:
+//the expenses by categories chart is already created, maybe can see some improvements
+// missing the creation of the other charts
 // * cycles - completed:
 
 // TODO: think about the possibility of moving the snackbar utility
@@ -122,7 +128,7 @@ export default {
 
 // TODO: adjust the navbar for smaller screens
 
-// TODO: think about changing the color pallet for some components, like using more pale colors to match the greyish of the app in general
+// TODO: update the cycles page with the layout changes from the dashboard
 
 // TODO: time ? study more about axios and async/await : move on
 

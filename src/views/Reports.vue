@@ -1,61 +1,42 @@
-<template></template>
+<template>
+  <div id="charts">
+    <v-layout justify-space-around row wrap>
+      <v-flex xs12 md5 class="mb-5">
+        <Categories />
+      </v-flex>
+      <!-- <v-spacer></v-spacer> -->
+      <v-flex xs12 md5 class="mb-5">
+        <Balance />
+      </v-flex>
+    </v-layout>
+  </div>
+</template>
+
 
 <script>
-import { mapState } from "vuex";
+import Categories from "@/components/reports/CategoriesChart.vue";
+import Balance from "@/components/reports/BalanceChart.vue";
+
 export default {
+  name: "Reports",
+  components: { Categories, Balance },
   data() {
-    return {
-      values: [
-        {
-          name: "transport",
-          value: "10.0"
-        },
-        {
-          name: "leisure",
-          value: 0
-        },
-        {
-          name: "habitation",
-          value: 0
-        },
-        {
-          name: "health",
-          value: "5.0"
-        },
-        {
-          name: "education",
-          value: "55.0"
-        },
-        {
-          name: "payments",
-          value: "30.0"
-        }
-      ]
-    };
+    return {};
   },
-  // computed: mapState({
-  //   list: state => state.list
-  // }),
-  // watch: {
-  //   list() {
-  //     this.dataSource();
-  //   }
-  // },
-  methods: {
-    dataSource() {
-      const categories = this.values.map(item => item.name);
-
-      const values = this.values.map(item => parseFloat(item.value));
-
-      this.setup({ categories, values });
-    },
-    setup(obj) {}
-  },
-  mounted() {
-    this.dataSource;
-  }
+  computed: {},
+  watch: {},
+  methods: {}
 };
+
+// TODO: think about other kinds of charts that is interesting to have in this page and implement them
+// * ideas for charts:
+// 1. a pie chart showing the percentual balance from each account. Maybe use that video with highcharts and vue to implement this.
+// 2. a (maybe) line chart with the history off all expenses
+// 3. the same but for incomes
 </script>
 
-<style>
+<style scoped>
+#charts {
+  margin-top: 60px;
+}
 </style>

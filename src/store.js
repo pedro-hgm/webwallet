@@ -40,6 +40,7 @@ export default new Vuex.Store({
 			state.currentExpenses.push(...payload);
 		},
 		newExpense(state, payload) {
+			// TODO: replace this for a call from the api since the user can create a new expense with a date that does not fit in the current one
 			state.currentExpenses.push(payload);
 		},
 		setCurrentIncomes(state, payload) {
