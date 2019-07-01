@@ -245,8 +245,7 @@ export default {
       axios
         .get(`http://localhost:3000/cycles/${this.$store.getters.userId}`)
         .then(res => {
-          this.cycles = [];
-          this.cycles.push(...res.data);
+          this.cycles = res.data;
         })
         .catch(err => {
           console.log(err);
@@ -258,16 +257,14 @@ export default {
           id: id
         })
         .then(res => {
-          this.incomes.push(...res.data[0]);
-          this.expenses.push(...res.data[1]);
+          this.incomes = res.data[0];
+          this.expenses = res.data[1];
         })
         .catch(err => {
           console.log(err);
         });
     },
     findCycle(payload) {
-      this.incomes = [];
-      this.expenses = [];
       this.requestCycleValues(payload.id);
       this.activeCycleId = payload.id;
     },

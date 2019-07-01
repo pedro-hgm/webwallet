@@ -15,12 +15,13 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import axios from "axios";
+import { EventBus } from "@/event-bus.js";
 export default {
   name: "currentIncomes",
   data() {
     return {
-      // incomes: null,
       year: null,
       month: null
     };
@@ -34,9 +35,7 @@ export default {
           id: this.$store.getters.userId
         })
         .then(res => {
-          if (res.statusText === "OK") {
-            this.$store.commit("setCurrentIncomes", res.data);
-          }
+          this.$store.commit("setCurrentIncomes", res.data);
         })
         .catch(err => {
           console.log(err);
@@ -48,10 +47,16 @@ export default {
       this.month = fullDate.getMonth() + 1;
     }
   },
+  watch: {
+    accounts() {
+      this.requestIncomesByDate();
+    }
+  },
   computed: {
-    incomes() {
-      return this.$store.getters.getCurrentIncomes;
-    },
+    ...mapState({
+      incomes: state => state.currentIncomes,
+      accounts: state => state.userAccounts
+    }),
     currentIncomes() {
       if (this.incomes) {
         const incomes = this.incomes;
@@ -69,6 +74,7 @@ export default {
   created() {
     this.getDate();
     this.requestIncomesByDate();
+    EventBus.$on("newIncome", () => this.requestIncomesByDate());
   }
 };
 </script>

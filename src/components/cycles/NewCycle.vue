@@ -58,11 +58,19 @@
           <v-layout justify-center row>
             <v-btn
               @click="create"
+              :loading="loading"
               depressed
               small
               color="blue-grey"
               class="mx-0 mt-3 white--text"
             >Create</v-btn>
+            <v-btn
+              @click="closeDialog"
+              depressed
+              small
+              color="blue-grey"
+              class="pa-1 mt-3 white--text"
+            >cancel</v-btn>
           </v-layout>
         </v-form>
       </v-card-text>
@@ -72,13 +80,15 @@
 
 <script>
 import axios from "axios";
+import { EventBus } from "@/event-bus.js";
 export default {
   name: "NewCycle",
   data() {
     return {
       date: "",
       rules: [value => value.length > 0 || "Can't be blank"],
-      dialog: false
+      dialog: false,
+      loading: false
     };
   },
   computed: {
@@ -86,10 +96,11 @@ export default {
       return this.$store.getters.userId;
     }
   },
-  created() {},
   methods: {
     create() {
       if (this.$refs.form.validate()) {
+        this.loading = true;
+
         let formattedDate = this.date.split("-");
         let formattedYear = parseInt(formattedDate[0], 10);
         let formattedMonth = parseInt(formattedDate[1], 10);
@@ -106,19 +117,31 @@ export default {
             cycle
           })
           .then(res => {
-            if (res.status === 201) {
-              this.dialog = false;
-              this.date = "";
-              this.account_id = [];
+            this.loading = false;
+            this.dialog = false;
+            this.date = "";
+            this.account_id = [];
 
-              this.$emit("newCycle", res.data);
-            }
+            this.$emit("newCycle", res.data);
+            EventBus.$emit("snackbar", {
+              value: true,
+              color: "#81C784",
+              message: "Cycle successfuly created"
+            });
           })
           .catch(err => {
             console.log(err);
             this.dialog = false;
+            EventBus.$emit("snackbar", {
+              value: true,
+              color: "#E57373",
+              message: "Sorry, but we couldn't create your expense"
+            });
           });
       }
+    },
+    closeDialog() {
+      this.dialog = false;
     }
   }
 };

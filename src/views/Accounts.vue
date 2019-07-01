@@ -50,9 +50,6 @@ export default {
           next({ name: "home" });
         }
       });
-    },
-    edit(id) {
-      console.log(id);
     }
   },
   computed: {

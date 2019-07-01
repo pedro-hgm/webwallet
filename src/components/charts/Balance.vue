@@ -15,18 +15,18 @@ export default {
   },
   computed: {
     ...mapState({
-      list: state => state.userAccounts
+      accountsList: state => state.userAccounts
     })
   },
 
   watch: {
-    list() {
+    accountsList() {
       this.dataSource();
     }
   },
   methods: {
     dataSource() {
-      const accounts = this.list.map(account => {
+      const accounts = this.accountsList.map(account => {
         return {
           name: account.name,
           y: parseFloat(account.balance)
@@ -189,7 +189,7 @@ export default {
       });
     }
   },
-  created() {},
+
   mounted() {
     this.dataSource();
   }
@@ -200,10 +200,6 @@ export default {
 @import "https://code.highcharts.com/5.0.0/css/highcharts.css";
 
 #container-for-balance {
-  /* min-width: 310px;
-  max-width: 600px;
-  height: 400px;
-  margin: 15% auto; */
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.7);
   -moz-box-shadow: 2px 2px 2px 2px #ccc;

@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
       <v-tooltip top>
-        <v-btn slot="activator" v-on="on" icon dark small class="btn">
+        <v-btn slot="activator" v-on="on" icon dark small>
           <v-icon large color="#81C784">trending_up</v-icon>
         </v-btn>
         <span>New Income</span>
@@ -71,6 +71,7 @@
           <v-layout justify-center row>
             <v-btn
               @click="create"
+              :loading="loading"
               depressed
               small
               color="#81C784"
@@ -92,6 +93,8 @@
 
 <script>
 import axios from "axios";
+import { EventBus } from "@/event-bus.js";
+import { mapState } from "vuex";
 export default {
   name: "NewIncome",
   data() {
@@ -101,17 +104,15 @@ export default {
       account_id: "",
       description: "",
       rules: [value => value.length > 0 || "Can't be blank"],
-      feedback: null,
-      dialog: false
+      dialog: false,
+      loading: false
     };
   },
   computed: {
-    accounts() {
-      return this.$store.getters.getAccounts;
-    },
-    user_id() {
-      return this.$store.getters.userId;
-    }
+    ...mapState({
+      accounts: state => state.userAccounts,
+      user_id: state => state.userId
+    })
   },
   created() {
     this.account_id = this.accounts[0].id;
@@ -119,6 +120,8 @@ export default {
   methods: {
     create() {
       if (this.$refs.form.validate()) {
+        this.loading = true;
+
         let formattedDate = this.date.split("-");
         let formattedYear = parseInt(formattedDate[0], 10);
         let formattedMonth = parseInt(formattedDate[1], 10);
@@ -133,35 +136,34 @@ export default {
           account_id: this.account_id,
           user_id: this.user_id
         };
-        console.log(income);
         axios
           .post("http://localhost:3000/incomes", {
             income
           })
           .then(res => {
-            console.log(res);
-            if (res.status === 201) {
-              this.dialog = false;
-              this.setBalance(this.account_id, income.value);
-              this.$emit("activateSnackbar", {
-                value: true,
-                color: "success",
-                message: "Income successfuly created"
-              });
-              this.$store.commit("newIncome", income);
-            }
+            this.loading = false;
+            this.dialog = false;
+            this.setBalance(this.account_id, income.value);
+
+            EventBus.$emit("newIncome");
+            EventBus.$emit("snackbar", {
+              value: true,
+              color: "#81C784",
+              message: "Income successfuly created"
+            });
+
+            this.value = 0;
+            this.description = "";
           })
           .catch(err => {
             console.log(err);
             this.dialog = false;
-            this.$emit("activateSnackbar", {
+            EventBus.$emit("snackbar", {
               value: true,
-              color: "error",
+              color: "#E57373",
               message: "Sorry, but we couldn't create your income"
             });
           });
-        this.value = 0;
-        this.description = "";
       }
     },
     setBalance(id, value) {
@@ -169,23 +171,19 @@ export default {
       axios
         .post("http://localhost:3000/accounts/set_balance", { id, value })
         .then(res => {
-          console.log(res.data);
+          this.$emit("newIncome");
         })
         .catch(err => {
           console.log(err);
         });
     },
-    closeDialog(){
-      this.dialog = false
+    closeDialog() {
+      this.dialog = false;
     }
   }
 };
 </script>
 
 <style scoped>
-.btn {
-  /* margin-bottom: 140px; */
-  /* margin-right: 20px; */
-}
 </style>
 

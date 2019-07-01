@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
       <v-tooltip top>
-        <v-btn slot="activator" v-on="on" icon dark small class="btn">
+        <v-btn slot="activator" v-on="on" icon dark small>
           <v-icon large color="#5C6BC0">account_balance</v-icon>
         </v-btn>
         <span>New Account</span>
@@ -46,6 +46,7 @@
           <v-layout justify-center row>
             <v-btn
               @click="create"
+              :loading="loading"
               depressed
               small
               color="#5C6BC0"
@@ -67,6 +68,7 @@
 
 <script>
 import axios from "axios";
+import { EventBus } from "@/event-bus.js";
 export default {
   name: "NewAccount",
   data() {
@@ -77,12 +79,15 @@ export default {
       rules: [value => value.length > 0 || "Can't be blank"],
       feedback: null,
       dialog: false,
-      type: ["Checking Account", "Money", "Savings", "Investments", "Others"]
+      type: ["Checking Account", "Money", "Savings", "Investments", "Others"],
+      loading: false
     };
   },
   methods: {
     create() {
       if (this.$refs.form.validate()) {
+        this.loading = true;
+
         const account = {
           name: this.name,
           balance: this.balance,
@@ -95,32 +100,28 @@ export default {
             account
           })
           .then(res => {
-            if (res.status === 201) {
-              this.dialog = false;
-              this.$store.commit("newAccount", res.data);
-              this.$emit("activateSnackbar", {
-                value: true,
-                color: "success",
-                message: "Account successfuly created"
-              });
-              // this.$router.push({
-              //   name: "dashboard"
-              // });
-            }
+            this.loading = false;
+            this.dialog = false;
+            this.$store.commit("newAccount", res.data);
+            EventBus.$emit("snackbar", {
+              value: true,
+              color: "#81C784",
+              message: "Account successfuly created"
+            });
+
+            this.name = "";
+            this.balance = "";
+            this.kind = "";
           })
           .catch(err => {
             console.log(err);
             this.dialog = false;
-            this.$emit("activateSnackbar", {
+            EventBus.$emit("snackbar", {
               value: true,
-              color: "error",
+              color: "#E57373",
               message: "Sorry, but we couldn't create your account"
             });
           });
-
-        this.name = "";
-        this.balance = "";
-        this.kind = "";
       }
     },
     closeDialog() {

@@ -15,16 +15,20 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "currentBalance",
   data() {
     return {};
   },
   computed: {
+    ...mapState({
+      accounts: state => state.userAccounts
+    }),
+
     currentBalance() {
-      const accounts = this.$store.getters.getAccounts;
       let currentBalance = 0.0;
-      for (const account of accounts) {
+      for (const account of this.accounts) {
         currentBalance += parseFloat(account.balance);
       }
       return currentBalance;

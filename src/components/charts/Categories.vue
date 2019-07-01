@@ -7,22 +7,12 @@
 import { mapState } from "vuex";
 import Highcharts from "highcharts";
 import axios from "axios";
+import { EventBus } from "@/event-bus.js";
 export default {
   data() {
     return {
       chartValues: []
     };
-  },
-  computed: {
-    // ...mapState({
-    //   list: state => state.list
-    // })
-  },
-
-  watch: {
-    // list() {
-    //   this.dataSource();
-    // }
   },
   methods: {
     requestChartData() {
@@ -31,10 +21,8 @@ export default {
           id: this.$store.getters.userId
         })
         .then(res => {
-          if (res.status === 200) {
-            this.chartValues = res.data;
-            this.dataSource();
-          }
+          this.chartValues = res.data;
+          this.dataSource();
         })
         .catch(err => {
           console.log(err);
@@ -42,8 +30,6 @@ export default {
     },
     dataSource() {
       const categories = this.chartValues.map(item => item.name);
-
-      // const values = this.values.map(item => parseFloat(item.y));
 
       this.setup(categories);
     },
@@ -120,9 +106,8 @@ export default {
   },
   created() {
     this.requestChartData();
-    // TODO: maybe create a logic that everytime the user creates a new expense, this request is repeated to get the updated data
-  },
-  mounted() {}
+    EventBus.$on("newExpense", () => this.requestChartData());
+  }
 };
 </script>
 
@@ -130,10 +115,6 @@ export default {
 @import "https://code.highcharts.com/5.0.0/css/highcharts.css";
 
 #container-for-categories {
-  /* min-width: 310px;
-  max-width: 600px;
-  height: 400px;
-  margin: 15% auto; */
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.7);
   -moz-box-shadow: 2px 2px 2px 2px #ccc;

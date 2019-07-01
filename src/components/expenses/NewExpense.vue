@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
       <v-tooltip top>
-        <v-btn slot="activator" v-on="on" icon dark small class="btn">
+        <v-btn slot="activator" v-on="on" icon dark small>
           <v-icon large color="#E57373">trending_down</v-icon>
         </v-btn>
         <span>New Expense</span>
@@ -64,18 +64,16 @@
                   <v-icon class="mr-2">account_balance</v-icon>Account:
                 </h3>
 
-                
-                  <v-layout column>
-                    <v-radio-group
-                      v-for="account in accounts"
-                      :key="account.id"
-                      v-model="account_id"
-                      :mandatory="true"
-                    >
-                      <v-radio color="#E57373" :label="account.name" :value="account.id"></v-radio>
-                    </v-radio-group>
-                  </v-layout>
-                
+                <v-layout column>
+                  <v-radio-group
+                    v-for="account in accounts"
+                    :key="account.id"
+                    v-model="account_id"
+                    :mandatory="true"
+                  >
+                    <v-radio color="#E57373" :label="account.name" :value="account.id"></v-radio>
+                  </v-radio-group>
+                </v-layout>
               </v-flex>
 
               <v-flex xs6>
@@ -83,19 +81,17 @@
                   <v-icon class="mr-2">category</v-icon>Category:
                 </h3>
 
-                
-                  <v-layout column>
-                    <v-radio-group
-                      v-for="category in categories"
-                      :key="category.id"
-                      v-model="category_id"
-                      :mandatory="true"
-                      :prepend-icon="category.icon"
-                    >
-                      <v-radio color="#E57373" :label="category.name" :value="category.id"></v-radio>
-                    </v-radio-group>
-                  </v-layout>
-               
+                <v-layout column>
+                  <v-radio-group
+                    v-for="category in categories"
+                    :key="category.id"
+                    v-model="category_id"
+                    :mandatory="true"
+                    :prepend-icon="category.icon"
+                  >
+                    <v-radio color="#E57373" :label="category.name" :value="category.id"></v-radio>
+                  </v-radio-group>
+                </v-layout>
               </v-flex>
             </v-layout>
           </v-container>
@@ -103,6 +99,7 @@
           <v-layout justify-center row>
             <v-btn
               @click="create"
+              :loading="loading"
               depressed
               small
               color="#E57373"
@@ -124,6 +121,8 @@
 
 <script>
 import axios from "axios";
+import { EventBus } from "@/event-bus.js";
+import { mapState } from "vuex";
 export default {
   name: "NewExpense",
   data() {
@@ -134,20 +133,16 @@ export default {
       category_id: 1,
       description: "",
       rules: [value => value.length > 0 || "Can't be blank"],
-      feedback: null,
-      dialog: false
+      dialog: false,
+      loading: false
     };
   },
   computed: {
-    accounts() {
-      return this.$store.getters.getAccounts;
-    },
-    categories() {
-      return this.$store.getters.getCategories;
-    },
-    user_id() {
-      return this.$store.getters.userId;
-    }
+    ...mapState({
+      categories: state => state.categories,
+      accounts: state => state.userAccounts,
+      user_id: state => state.userId
+    })
   },
   created() {
     this.account_id = this.accounts[0].id;
@@ -155,6 +150,8 @@ export default {
   methods: {
     create() {
       if (this.$refs.form.validate()) {
+        this.loading = true;
+
         let formattedDate = this.date.split("-");
         let formattedYear = parseInt(formattedDate[0], 10);
         let formattedMonth = parseInt(formattedDate[1], 10);
@@ -175,29 +172,30 @@ export default {
             expense
           })
           .then(res => {
-            console.log(res);
-            if (res.status === 201) {
-              this.dialog = false;
-              this.setBalance(this.account_id, expense.value);
-              this.$emit("activateSnackbar", {
-                value: true,
-                color: "success",
-                message: "Expense successfuly created"
-              });
-              // this.$store.commit("newExpense", expense);
-            }
+            this.loading = false;
+            this.dialog = false;
+
+            this.setBalance(this.account_id, expense.value);
+
+            EventBus.$emit("newExpense");
+            EventBus.$emit("snackbar", {
+              value: true,
+              color: "#81C784",
+              message: "Expense successfuly created"
+            });
+
+            this.value = 0;
+            this.description = "";
           })
           .catch(err => {
             console.log(err);
             this.dialog = false;
-            this.$emit("activateSnackbar", {
+            EventBus.$emit("snackbar", {
               value: true,
-              color: "error",
+              color: "#E57373",
               message: "Sorry, but we couldn't create your expense"
             });
           });
-        this.value = 0;
-        this.description = "";
       }
     },
     setBalance(id, value) {
@@ -205,7 +203,7 @@ export default {
       axios
         .post("http://localhost:3000/accounts/set_balance", { id, value })
         .then(res => {
-          // console.log(res.data);
+          this.$emit("newExpense");
         })
         .catch(err => {
           console.log(err);
@@ -219,9 +217,5 @@ export default {
 </script>
 
 <style scoped>
-.btn {
-  /* margin-bottom: 90px; */
-  /* margin-right: 20px; */
-}
 </style>
 

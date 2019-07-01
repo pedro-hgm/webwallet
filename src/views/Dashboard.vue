@@ -1,9 +1,5 @@
 <template>
   <v-container>
-    <v-snackbar v-model="snackbar.value" :timeout="6000" top :color="snackbar.color">
-      <span>{{ snackbar.message }}</span>
-      <v-btn color="white" flat @click="snackbar.value = false">Close</v-btn>
-    </v-snackbar>
     <div class="mt-1">
       <p v-if="!hasAccount">Looks like you don't have an account yet, let's create one to start!</p>
       <v-layout justify-space-around row wrap>
@@ -35,13 +31,13 @@
           <v-card-text>
             <v-layout class="mb-1" row>
               <v-flex class="mx-1" xs4>
-                <NewAccount @activateSnackbar="Snackbar" />
+                <NewAccount />
               </v-flex>
               <v-flex class="mx-1" xs4>
-                <NewIncome v-if="hasAccount" @activateSnackbar="Snackbar" />
+                <NewIncome v-if="hasAccount" @newIncome="requestAccount" />
               </v-flex>
               <v-flex class="mx-1" xs4>
-                <NewExpense v-if="hasAccount" @activateSnackbar="Snackbar" />
+                <NewExpense @newExpense="requestAccount" v-if="hasAccount" />
               </v-flex>
             </v-layout>
           </v-card-text>
@@ -100,9 +96,7 @@ export default {
         axios
           .get(`http://localhost:3000/accounts/${this.$store.getters.userId}`)
           .then(res => {
-            if (res.status === 200) {
-              this.$store.commit("setAccount", res.data);
-            }
+            this.$store.commit("setAccount", res.data);
           })
           .catch(err => console.log(err));
       }
@@ -111,14 +105,9 @@ export default {
       axios
         .get(`http://localhost:3000/categories`)
         .then(res => {
-          if (res.status === 200) {
-            this.$store.commit("setCategories", res.data);
-          }
+          this.$store.commit("setCategories", res.data);
         })
         .catch(err => console.log(err));
-    },
-    Snackbar(payload) {
-      this.snackbar = payload;
     }
   },
   created() {
@@ -136,37 +125,21 @@ export default {
   }
 };
 
-// * Review the data atualization when something changes. This check must be done for all components. There are a lot of stuff to fix, like the creation of new expenses and incomes and the update in the dashboard, accounts etc and a lot more
-
 // TODO: the pages (routes) of the app:
 // I thinking of the following main pages:
-// * dashboard - work in progress:
-// basically missing the charts
-// the charts should be some sort of overwall summary
-// maybe instead of repeating the cards from the cycle, the current elements could be an chart with the current balance and the monthly incomes/expenses
+// * dashboard - completed:
+
 // * accounts - work in progress
 // just missing the ability to delete accounts,
 // the problem is how this action is going to affect other components that work with accounts
 // * reports - work in progress:
-//the expenses by categories chart is already created, maybe can see some improvements
-// missing the creation of the other charts
+// the future of this page is unclear since I moved the charts to the dashboard, but maybe its a god possibility to use this space to implement other functionalities like integration with other apis etc
+
 // * cycles - completed:
 
 // * home - completed:
-// some has to be done about a logged user being able to enter the home and theregfore seeing the signup buttom. Also the requests for routes that aren't attended should be fixed
-
-// TODO: think about the possibility of moving the snackbar utility
-// to the navbar, therefore using it in other places of the app than only
-// dashboard. This can be done by changing the activation by events for
-// state properties, getters, mutations, etc
-
-// TODO: adjust the navbar for smaller screens
-
-// TODO: update the cycles page with the layout changes from the dashboard
 
 // TODO: time ? study more about axios and async/await : move on
-
-// ! last but not least, be aware of the power of computed properties
 </script>
 
 <style scoped>

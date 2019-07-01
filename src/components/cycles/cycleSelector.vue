@@ -21,7 +21,7 @@
                 v-model="selectedCycle"
                 :mandatory="true"
               >
-                <v-radio :label="`${cycle.month} / ${cycle.year}`" :value="cycle"></v-radio>
+                <v-radio color="blue-grey" :label="`${cycle.month} / ${cycle.year}`" :value="cycle"></v-radio>
               </v-radio-group>
             </v-layout>
           </v-container>

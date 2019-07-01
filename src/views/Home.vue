@@ -22,17 +22,16 @@ import Signup from "@/components/user/Signup.vue";
 export default {
   components: {
     Signup
+  },
+  methods: {},
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      if (vm.$store.getters.userLogin) {
+        next({ name: "dashboard" });
+      } else {
+        next();
+      }
+    });
   }
-  // methods: {
-  //   beforeRouteEnter(to, from, next) {
-  //     next(vm => {
-  //       if (vm.$store.getters.userLogin === false) {
-  //         next();
-  //       } else {
-  //         next({ name: "dashboard" });
-  //       }
-  //     });
-  //   }
-  // }
 };
 </script>

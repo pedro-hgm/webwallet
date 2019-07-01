@@ -1,14 +1,5 @@
 <template>
   <div id="charts">
-    <!-- <v-layout justify-space-around row wrap>
-      <v-flex xs12 md5 class="mb-5">
-        <Categories />
-      </v-flex>
-      
-      <v-flex xs12 md5 class="mb-5">
-        <Transactions />
-      </v-flex>
-    </v-layout>-->
     <h2>TO:</h2>
     <v-select v-model="to" :items="currencies"></v-select>
     <h2>FROM:</h2>
@@ -54,7 +45,8 @@ export default {
         .catch(err => {
           console.log(err);
         });
-    }
+    },
+    test2() {}
   },
   created() {
     this.test();
@@ -62,12 +54,6 @@ export default {
 };
 
 // TODO: maybe implement the money converter using the api
-
-// TODO: think about other kinds of charts that is interesting to have in this page and implement them
-// * ideas for charts:
-// 1. a pie chart showing the percentual balance from each account. Maybe use that video with highcharts and vue to implement this.
-// 2. a (maybe) line chart with the history off all expenses
-// 3. the same but for incomes
 </script>
 
 <style scoped>

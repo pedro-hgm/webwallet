@@ -15,12 +15,13 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import axios from "axios";
+import { EventBus } from "@/event-bus.js";
 export default {
   name: "currentExpenses",
   data() {
     return {
-      // expenses: null,
       year: null,
       month: null
     };
@@ -34,9 +35,7 @@ export default {
           id: this.$store.getters.userId
         })
         .then(res => {
-          if (res.statusText === "OK") {
-            this.$store.commit("setCurrentExpenses", res.data);
-          }
+          this.$store.commit("setCurrentExpenses", res.data);
         })
         .catch(err => {
           console.log(err);
@@ -49,9 +48,10 @@ export default {
     }
   },
   computed: {
-    expenses() {
-      return this.$store.getters.getCurrentExpenses;
-    },
+    ...mapState({
+      expenses: state => state.currentExpenses
+    }),
+
     currentExpenses() {
       if (this.expenses) {
         const expenses = this.expenses;
@@ -69,6 +69,7 @@ export default {
   created() {
     this.getDate();
     this.requestExpensesByDate();
+    EventBus.$on("newExpense", () => this.requestExpensesByDate());
   }
 };
 </script>

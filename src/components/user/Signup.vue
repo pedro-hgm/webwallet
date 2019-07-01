@@ -29,7 +29,8 @@
           ></v-text-field>
           <v-layout justify-center row>
             <v-btn
-              @click="Signup"
+              @click="signup"
+              :loading="loading"
               depressed
               small
               color="#212121"
@@ -51,18 +52,22 @@
 
 <script>
 import axios from "axios";
+import { EventBus } from "@/event-bus.js";
 export default {
   data() {
     return {
       email: "",
       password: "",
       rules: [value => value.length > 0 || "Can't be blank"],
-      dialog: false
+      dialog: false,
+      loading: false
     };
   },
   methods: {
-    Signup() {
+    signup() {
       if (this.$refs.form.validate()) {
+        this.loading = true;
+
         const user = {
           email: this.email,
           password: this.password
@@ -72,21 +77,33 @@ export default {
             user
           })
           .then(res => {
-            console.log(res);
-            if (res.statusText === "Created") {
-              this.$store.commit("changeStatus", true);
-              this.$store.commit("changeId", res.data);
-              this.$router.push({
-                name: "dashboard"
-              });
-            }
+            this.loading = false;
+            this.dialog = false;
+
+            this.$store.commit("changeStatus", true);
+            this.$store.commit("changeId", res.data);
+            this.$router.push({
+              name: "dashboard"
+            });
+
+            EventBus.$emit("snackbar", {
+              value: true,
+              color: "#81C784",
+              message: "Welcome!"
+            });
+            this.email = "";
+            this.password = "";
           })
           .catch(err => {
             console.log(err);
-          });
+            this.dialog = false;
 
-        this.email = "";
-        this.password = "";
+            EventBus.$emit("snackbar", {
+              value: true,
+              color: "#E57373",
+              message: "Sorry, but we couldn't create your account."
+            });
+          });
       }
     },
     closeDialog() {

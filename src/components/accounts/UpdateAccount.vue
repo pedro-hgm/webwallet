@@ -35,6 +35,7 @@
           <v-layout justify-center row>
             <v-btn
               @click="update"
+              :loading="loading"
               depressed
               small
               color="#5C6BC0"
@@ -56,6 +57,7 @@
 
 <script>
 import axios from "axios";
+import { EventBus } from "@/event-bus.js";
 export default {
   name: "UpdateAccount",
   props: {
@@ -69,50 +71,44 @@ export default {
       accountKind: this.kind,
       rules: [value => value.length > 0 || "Can't be blank"],
       dialog: false,
-      type: ["Checking Account", "Money", "Savings", "Investments", "Others"]
+      type: ["Checking Account", "Money", "Savings", "Investments", "Others"],
+      loading: false
     };
   },
   methods: {
     update() {
       if (this.$refs.form.validate()) {
+        this.loading = true;
+
         const account = {
           name: this.accountName,
           kind: this.accountKind
         };
 
-        console.log(account, this.id);
         axios
           .put(`http://localhost:3000/accounts/${this.id}`, {
             account
           })
           .then(res => {
-            if (res.status === 200) {
-              this.dialog = false;
-              this.requestAccount();
-              // this.$store.commit("newAccount", res.data);
-              // this.$emit("activateSnackbar", {
-              //   value: true,
-              //   color: "success",
-              //   message: "Account successfuly created"
-              // });
-              // this.$router.push({
-              //   name: "dashboard"
-              // });
-            }
+            this.loading = false;
+            this.dialog = false;
+            this.requestAccount();
+
+            EventBus.$emit("snackbar", {
+              value: true,
+              color: "#81C784",
+              message: "Account successfuly updated"
+            });
           })
           .catch(err => {
             console.log(err);
             this.dialog = false;
-            // this.$emit("activateSnackbar", {
-            //   value: true,
-            //   color: "error",
-            //   message: "Sorry, but we couldn't create your account"
-            // });
+            EventBus.$emit("snackbar", {
+              value: true,
+              color: "#E57373",
+              message: "Sorry, but we couldn't update your account"
+            });
           });
-
-        // this.name = "";
-        // this.balance = "";
-        // this.kind = "";
       }
     },
     requestAccount() {
