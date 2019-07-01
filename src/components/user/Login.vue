@@ -8,19 +8,44 @@
     </template>
     <v-card>
       <v-card-title>
-        <h2>Login</h2>
+        <v-layout justify-center row>
+          <h2 class="grey--text">Login</h2>
+        </v-layout>
       </v-card-title>
       <v-card-text>
         <v-form class="px-3" ref="form">
-          <v-text-field label="Email" v-model="email" prepend-icon="email" :rules="rules"></v-text-field>
           <v-text-field
+            color="#212121"
+            label="Email"
+            v-model="email"
+            prepend-icon="email"
+            :rules="rules"
+          ></v-text-field>
+          <v-text-field
+            color="#212121"
             label="Password"
             v-model="password"
             type="password"
             prepend-icon="vpn_key"
             :rules="rules"
           ></v-text-field>
-          <v-btn @click="login" flat class="mx-0 mt-3">Login</v-btn>
+
+          <v-layout justify-center row>
+            <v-btn
+              @click="login"
+              depressed
+              small
+              color="#212121"
+              class="pa-1 mt-3 white--text"
+            >login</v-btn>
+            <v-btn
+              @click="closeDialog"
+              depressed
+              small
+              color="#212121"
+              class="pa-1 mt-3 white--text"
+            >cancel</v-btn>
+          </v-layout>
         </v-form>
       </v-card-text>
     </v-card>
@@ -53,7 +78,6 @@ export default {
             password
           })
           .then(res => {
-            console.log(res);
             if (res.status === 200) {
               this.dialog = false;
               this.$store.commit("changeStatus", true);
@@ -70,6 +94,9 @@ export default {
         this.email = "";
         this.password = "";
       }
+    },
+    closeDialog() {
+      this.dialog = false;
     }
   }
 };

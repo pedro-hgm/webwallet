@@ -18,12 +18,12 @@
                 <div class="ml-2">$ {{account.balance}}</div>
               </v-flex>
               <v-flex xs12 sm2>
-                <div class="caption grey--text">Type</div>
-                <div>{{account.kind}}</div>
+                <div class="caption grey--text ml-2">Type</div>
+                <div class="ml-2">{{account.kind}}</div>
               </v-flex>
               <v-spacer></v-spacer>
               <v-flex xs12 sm1>
-                <UpdateAccount :name="account.name" :kind="account.kind" :id="account.id"/>
+                <UpdateAccount :name="account.name" :kind="account.kind" :id="account.id" />
               </v-flex>
             </v-layout>
           </v-card>

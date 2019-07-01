@@ -74,8 +74,15 @@
               depressed
               small
               color="#81C784"
-              class="mx-0 mt-3 white--text"
+              class="pa-1 mt-3 white--text"
             >Create</v-btn>
+            <v-btn
+              @click="closeDialog"
+              depressed
+              small
+              color="#81C784"
+              class="pa-1 mt-3 white--text"
+            >cancel</v-btn>
           </v-layout>
         </v-form>
       </v-card-text>
@@ -167,6 +174,9 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    closeDialog(){
+      this.dialog = false
     }
   }
 };

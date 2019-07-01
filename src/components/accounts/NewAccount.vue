@@ -49,8 +49,15 @@
               depressed
               small
               color="#5C6BC0"
-              class="mx-0 mt-3 white--text"
-            >Create</v-btn>
+              class="pa-1 mt-3 white--text"
+            >create</v-btn>
+            <v-btn
+              @click="closeDialog"
+              depressed
+              small
+              color="#5C6BC0"
+              class="pa-1 mt-3 white--text"
+            >cancel</v-btn>
           </v-layout>
         </v-form>
       </v-card-text>
@@ -82,13 +89,12 @@ export default {
           kind: this.kind,
           user_id: this.$store.getters.userId
         };
-        console.log(account);
+
         axios
           .post("http://localhost:3000/accounts", {
             account
           })
           .then(res => {
-            console.log(res);
             if (res.status === 201) {
               this.dialog = false;
               this.$store.commit("newAccount", res.data);
@@ -97,9 +103,9 @@ export default {
                 color: "success",
                 message: "Account successfuly created"
               });
-              this.$router.push({
-                name: "dashboard"
-              });
+              // this.$router.push({
+              //   name: "dashboard"
+              // });
             }
           })
           .catch(err => {
@@ -116,15 +122,14 @@ export default {
         this.balance = "";
         this.kind = "";
       }
+    },
+    closeDialog() {
+      this.dialog = false;
     }
   }
 };
 </script>
 
 <style scoped>
-.btn {
-  /* margin-bottom: 40px; */
-  /* margin-right: 20px; */
-}
 </style>
 

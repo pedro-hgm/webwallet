@@ -36,6 +36,11 @@ export default new Router({
 			path      : '/reports',
 			name      : 'reports',
 			component : Reports
+		},
+		{
+			path      : '/*',
+			name      : '*',
+			component : Dashboard
 		}
 	]
 });

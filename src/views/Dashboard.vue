@@ -25,23 +25,22 @@
       </v-flex>
       <v-flex xs12 md5 class="mb3">
         <Categories />
-        <!-- <v-img class="mt-3" src="undraw_charts_jj6t.svg" alt="wallet"></v-img> -->
       </v-flex>
     </v-layout>
 
     <v-layout class="btns" justify-space-around row wrap>
       <v-spacer></v-spacer>
-      <v-flex xs4>
-        <v-card class="text-xs-center ma-2 my-card">
+      <v-flex xs7 md3>
+        <v-card class="text-xs-center my-card">
           <v-card-text>
-            <v-layout class="mb-1" row wrap>
-              <v-flex xm4>
+            <v-layout class="mb-1" row>
+              <v-flex class="mx-1" xs4>
                 <NewAccount @activateSnackbar="Snackbar" />
               </v-flex>
-              <v-flex xm4>
+              <v-flex class="mx-1" xs4>
                 <NewIncome v-if="hasAccount" @activateSnackbar="Snackbar" />
               </v-flex>
-              <v-flex xm4>
+              <v-flex class="mx-1" xs4>
                 <NewExpense v-if="hasAccount" @activateSnackbar="Snackbar" />
               </v-flex>
             </v-layout>
@@ -50,20 +49,6 @@
       </v-flex>
       <v-spacer></v-spacer>
     </v-layout>
-    <!-- <v-layout class="text-xs-center btns" justify-space-around row> -->
-
-    <!-- <v-spacer></v-spacer>
-      <v-flex xs2 sm1>
-        <NewAccount @activateSnackbar="Snackbar" />
-      </v-flex>
-      <v-flex xs2 sm1>
-        <NewIncome v-if="hasAccount" @activateSnackbar="Snackbar" />
-      </v-flex>
-      <v-flex xs2 sm1>
-        <NewExpense v-if="hasAccount" @activateSnackbar="Snackbar" />
-      </v-flex>
-    <v-spacer></v-spacer>-->
-    <!-- </v-layout> -->
   </v-container>
 </template>
 
@@ -167,6 +152,9 @@ export default {
 // missing the creation of the other charts
 // * cycles - completed:
 
+// * home - completed:
+// some has to be done about a logged user being able to enter the home and theregfore seeing the signup buttom. Also the requests for routes that aren't attended should be fixed
+
 // TODO: think about the possibility of moving the snackbar utility
 // to the navbar, therefore using it in other places of the app than only
 // dashboard. This can be done by changing the activation by events for
@@ -183,7 +171,7 @@ export default {
 
 <style scoped>
 .btns {
-  margin-top: 6em;
+  margin-top: 5em;
 }
 .my-card {
   border-radius: 20px;

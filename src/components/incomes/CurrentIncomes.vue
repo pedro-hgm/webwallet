@@ -34,7 +34,7 @@ export default {
           id: this.$store.getters.userId
         })
         .then(res => {
-          if (res.status === 201) {
+          if (res.statusText === "OK") {
             this.$store.commit("setCurrentIncomes", res.data);
           }
         })

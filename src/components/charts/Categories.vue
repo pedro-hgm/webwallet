@@ -61,14 +61,15 @@ export default {
           style: {
             color: "#9E9E9E",
 
-            fontSize: "2.5em"
+            fontSize: "2em"
           }
         },
+
         subtitle: {
           text: "Source: WebWallet.com",
           style: {
             color: "#9E9E9E",
-            fontSize: "1.5em"
+            fontSize: "1em"
           }
         },
         xAxis: {
@@ -79,7 +80,8 @@ export default {
             text: "Total amount",
             style: {
               color: "grey",
-              fontSize: "1.4em"
+              fontSize: "1.4em",
+              fontWeight: "regular"
             }
           }
         },

@@ -79,8 +79,6 @@ export default {
         { name: "Expenses", y: totalExpenses }
       ];
 
-      console.log(data);
-
       // const percentage = accounts.map(item => {
       //   item.y = (item.y / total) * 100;
       //   return item;

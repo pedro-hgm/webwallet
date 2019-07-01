@@ -327,10 +327,4 @@ export default {
 .text-balance {
   color: #5c6bc0;
 }
-.transparent {
-  /* zoom: 1;
-  filter: alpha(opacity=50); */
-  /* opacity: 0.8; */
-  /* background-color: transparent; */
-}
 </style>

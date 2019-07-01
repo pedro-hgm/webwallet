@@ -64,7 +64,7 @@
                   <v-icon class="mr-2">account_balance</v-icon>Account:
                 </h3>
 
-                <form class="ml-4 my-2">
+                
                   <v-layout column>
                     <v-radio-group
                       v-for="account in accounts"
@@ -75,7 +75,7 @@
                       <v-radio color="#E57373" :label="account.name" :value="account.id"></v-radio>
                     </v-radio-group>
                   </v-layout>
-                </form>
+                
               </v-flex>
 
               <v-flex xs6>
@@ -83,7 +83,7 @@
                   <v-icon class="mr-2">category</v-icon>Category:
                 </h3>
 
-                <form class="ml-4 my-2">
+                
                   <v-layout column>
                     <v-radio-group
                       v-for="category in categories"
@@ -95,7 +95,7 @@
                       <v-radio color="#E57373" :label="category.name" :value="category.id"></v-radio>
                     </v-radio-group>
                   </v-layout>
-                </form>
+               
               </v-flex>
             </v-layout>
           </v-container>
@@ -106,8 +106,15 @@
               depressed
               small
               color="#E57373"
-              class="mx-0 mt-3 white--text"
+              class="pa-1 mt-3 white--text"
             >Create</v-btn>
+            <v-btn
+              @click="closeDialog"
+              depressed
+              small
+              color="#E57373"
+              class="pa-1 mt-3 white--text"
+            >cancel</v-btn>
           </v-layout>
         </v-form>
       </v-card-text>
@@ -177,7 +184,7 @@ export default {
                 color: "success",
                 message: "Expense successfuly created"
               });
-              this.$store.commit("newExpense", expense);
+              // this.$store.commit("newExpense", expense);
             }
           })
           .catch(err => {
@@ -198,11 +205,14 @@ export default {
       axios
         .post("http://localhost:3000/accounts/set_balance", { id, value })
         .then(res => {
-          console.log(res.data);
+          // console.log(res.data);
         })
         .catch(err => {
           console.log(err);
         });
+    },
+    closeDialog() {
+      this.dialog = false;
     }
   }
 };

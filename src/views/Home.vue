@@ -7,7 +7,7 @@
           <h4
             class="display-1 ma-4 grey--text"
           >Tired of complicated apps and just want something easy to go up and running? Sign up for free.</h4>
-          <Signup/>
+          <Signup />
         </v-flex>
         <v-flex xs12 md6>
           <v-img class="ma-4" src="undraw_wallet_aym5.svg" alt="wallet"></v-img>
@@ -23,5 +23,16 @@ export default {
   components: {
     Signup
   }
+  // methods: {
+  //   beforeRouteEnter(to, from, next) {
+  //     next(vm => {
+  //       if (vm.$store.getters.userLogin === false) {
+  //         next();
+  //       } else {
+  //         next({ name: "dashboard" });
+  //       }
+  //     });
+  //   }
+  // }
 };
 </script>

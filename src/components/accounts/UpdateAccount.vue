@@ -20,7 +20,7 @@
             label="Account's name"
             v-model="accountName"
             prepend-icon="assignment"
-            color="indigo"
+            color="#5C6BC0"
           ></v-text-field>
 
           <v-select
@@ -28,7 +28,7 @@
             :items="type"
             label="Type"
             required
-            color="indigo"
+            color="#5C6BC0"
             v-model="accountKind"
           ></v-select>
 
@@ -37,9 +37,16 @@
               @click="update"
               depressed
               small
-              color="indigo"
-              class="mx-0 mt-3 white--text"
-            >Update</v-btn>
+              color="#5C6BC0"
+              class="pa-1 mt-3 white--text"
+            >update</v-btn>
+            <v-btn
+              @click="closeDialog"
+              depressed
+              small
+              color="#5C6BC0"
+              class="pa-1 mt-3 white--text"
+            >cancel</v-btn>
           </v-layout>
         </v-form>
       </v-card-text>
@@ -119,6 +126,9 @@ export default {
           })
           .catch(err => console.log(err));
       }
+    },
+    closeDialog() {
+      this.dialog = false;
     }
   }
 };
