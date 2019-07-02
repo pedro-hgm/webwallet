@@ -32,12 +32,11 @@ export default {
   methods: {
     requestChartIncomes() {
       axios
-        .get(`http://localhost:3000/incomes/${this.$store.getters.userId}`)
+        .get(
+          `http://localhost:3000/api/v1/incomes/${this.$store.getters.userId}`
+        )
         .then(res => {
-          if (res.status === 200) {
-            this.incomes = res.data;
-            // this.dataSource();
-          }
+          this.incomes = res.data;
         })
         .catch(err => {
           console.log(err);
@@ -45,27 +44,17 @@ export default {
     },
     requestChartExpenses() {
       axios
-        .get(`http://localhost:3000/expenses/${this.$store.getters.userId}`)
+        .get(
+          `http://localhost:3000/api/v1/expenses/${this.$store.getters.userId}`
+        )
         .then(res => {
-          if (res.status === 200) {
-            this.expenses = res.data;
-            // this.dataSource();
-          }
+          this.expenses = res.data;
         })
         .catch(err => {
           console.log(err);
         });
     },
     dataSource() {
-      // const incomes = this.list.map(income => {
-      //   return {
-      //     day: income.day,
-      //     value: parseFloat(income.value)
-      //   };
-      // });
-
-      // console.log(incomes);
-
       const totalIncomes = this.incomes.reduce((acc, item) => {
         return acc + parseFloat(item.value);
       }, 0);
@@ -78,11 +67,6 @@ export default {
         { name: "Incomes", y: totalIncomes },
         { name: "Expenses", y: totalExpenses }
       ];
-
-      // const percentage = accounts.map(item => {
-      //   item.y = (item.y / total) * 100;
-      //   return item;
-      // });
 
       this.setup(data);
     },
@@ -149,10 +133,6 @@ export default {
 @import "https://code.highcharts.com/5.0.0/css/highcharts.css";
 
 #container-for-transactions {
-  /* min-width: 310px;
-  max-width: 600px;
-  height: 400px;
-  margin: 15% auto; */
   border-radius: 30px;
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.7);

@@ -73,7 +73,7 @@ export default {
           password: this.password
         };
         axios
-          .post("http://localhost:3000/users", {
+          .post("http://localhost:3000/api/v1/users", {
             user
           })
           .then(res => {

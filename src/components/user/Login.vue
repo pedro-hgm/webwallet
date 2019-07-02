@@ -77,7 +77,7 @@ export default {
           password: this.password
         };
         axios
-          .post("http://localhost:3000/users/login", {
+          .post("http://localhost:3000/api/v1/users/login", {
             email,
             password
           })

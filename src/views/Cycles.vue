@@ -243,7 +243,9 @@ export default {
     },
     requestCycles() {
       axios
-        .get(`http://localhost:3000/cycles/${this.$store.getters.userId}`)
+        .get(
+          `http://localhost:3000/api/v1/cycles/${this.$store.getters.userId}`
+        )
         .then(res => {
           this.cycles = res.data;
         })
@@ -253,7 +255,7 @@ export default {
     },
     requestCycleValues(id) {
       axios
-        .post("http://localhost:3000/cycles/complete_cycle", {
+        .post("http://localhost:3000/api/v1/cycles/complete_cycle", {
           id: id
         })
         .then(res => {
@@ -271,7 +273,7 @@ export default {
     endCycle() {
       if (confirm("Are you sure?")) {
         axios
-          .post("http://localhost:3000/cycles/current", {
+          .post("http://localhost:3000/api/v1/cycles/current", {
             id: this.currentCycle.id
           })
           .then(res => {
