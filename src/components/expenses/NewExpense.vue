@@ -1,8 +1,8 @@
 <template>
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
-      <v-tooltip top>
-        <v-btn slot="activator" v-on="on" icon dark small>
+      <v-tooltip :disabled="disabled" top>
+        <v-btn :disabled="disabled" slot="activator" v-on="on" icon dark small>
           <v-icon large color="#E57373">trending_down</v-icon>
         </v-btn>
         <span>New Expense</span>
@@ -17,6 +17,7 @@
       <v-card-text>
         <v-form class="px-3" ref="form">
           <v-text-field
+            :rules="rules"
             type="number"
             min="0"
             step="0.1"
@@ -137,16 +138,26 @@ export default {
       loading: false
     };
   },
+  watch: {
+    accounts() {
+      this.setAccountId();
+    }
+  },
   computed: {
     ...mapState({
       categories: state => state.categories,
       accounts: state => state.userAccounts,
       user_id: state => state.userId
-    })
+    }),
+    disabled() {
+      if (!this.accounts.length) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   },
-  created() {
-    this.account_id = this.accounts[0].id;
-  },
+
   methods: {
     create() {
       if (this.$refs.form.validate()) {
@@ -211,6 +222,9 @@ export default {
     },
     closeDialog() {
       this.dialog = false;
+    },
+    setAccountId() {
+      this.account_id = this.accounts[0].id;
     }
   }
 };

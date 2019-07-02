@@ -40,7 +40,7 @@ export default new Router({
 		{
 			path      : '/*',
 			name      : '*',
-			component : Dashboard
+			component : Home
 		}
 	]
 });

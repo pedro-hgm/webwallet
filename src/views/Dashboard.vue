@@ -1,51 +1,63 @@
 <template>
-  <v-container>
-    <div class="mt-1">
-      <p v-if="!hasAccount">Looks like you don't have an account yet, let's create one to start!</p>
-      <v-layout justify-space-around row wrap>
-        <v-flex xs12 sm6 md4 lg3>
-          <CurrentBalance v-if="hasAccount" />
-        </v-flex>
-        <v-flex xs12 sm6 md4 lg3>
-          <CurrentIncomes v-if="hasAccount" />
-        </v-flex>
-        <v-flex xs12 sm6 md4 lg3>
-          <CurrentExpenses v-if="hasAccount" />
+  <div id="dashboard">
+    <div>
+      <v-layout v-if="!hasAccount" justify-center row wrap>
+        <v-flex xs12>
+          <v-alert v-model="alert" color="blue-grey" outline dismissible icon="new_releases">
+            <h5
+              class="subheading"
+            >Looks like you don't have an account yet, let's create one to start!</h5>
+          </v-alert>
         </v-flex>
       </v-layout>
     </div>
+    <v-container>
+      <div class="mt-1">
+        <v-layout justify-space-around row wrap>
+          <v-flex xs12 sm6 md4 lg3>
+            <CurrentIncomes v-if="hasAccount" />
+          </v-flex>
+          <v-flex xs12 sm6 md4 lg3>
+            <CurrentBalance v-if="hasAccount" />
+          </v-flex>
+          <v-flex xs12 sm6 md4 lg3>
+            <CurrentExpenses v-if="hasAccount" />
+          </v-flex>
+        </v-layout>
+      </div>
 
-    <v-layout justify-space-around row wrap class="my-5">
-      <v-flex xs12 md5 class="mb-3">
-        <Balance />
-      </v-flex>
-      <v-flex xs12 md5 class="mb3">
-        <Categories />
-      </v-flex>
-    </v-layout>
+      <v-layout justify-space-around row wrap class="my-5">
+        <v-flex xs12 md5 class="mb-3">
+          <Balance v-if="hasAccount" />
+        </v-flex>
+        <v-flex xs12 md5 class="mb3">
+          <Categories v-if="hasAccount" />
+        </v-flex>
+      </v-layout>
 
-    <v-layout class="btns" justify-space-around row wrap>
-      <v-spacer></v-spacer>
-      <v-flex xs7 md3>
-        <v-card class="text-xs-center my-card">
-          <v-card-text>
-            <v-layout class="mb-1" row>
-              <v-flex class="mx-1" xs4>
-                <NewAccount />
-              </v-flex>
-              <v-flex class="mx-1" xs4>
-                <NewIncome v-if="hasAccount" @newIncome="requestAccount" />
-              </v-flex>
-              <v-flex class="mx-1" xs4>
-                <NewExpense @newExpense="requestAccount" v-if="hasAccount" />
-              </v-flex>
-            </v-layout>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-      <v-spacer></v-spacer>
-    </v-layout>
-  </v-container>
+      <v-layout class="btns" justify-space-around row wrap>
+        <v-spacer></v-spacer>
+        <v-flex xs7 md3>
+          <v-card class="text-xs-center my-card">
+            <v-card-text>
+              <v-layout class="mb-1" row>
+                <v-flex class="mx-1" xs4>
+                  <NewIncome @newIncome="requestAccount" />
+                </v-flex>
+                <v-flex class="mx-1" xs4>
+                  <NewAccount />
+                </v-flex>
+                <v-flex class="mx-1" xs4>
+                  <NewExpense @newExpense="requestAccount" />
+                </v-flex>
+              </v-layout>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+        <v-spacer></v-spacer>
+      </v-layout>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -87,7 +99,8 @@ export default {
         value: false,
         color: "",
         message: ""
-      }
+      },
+      alert: true
     };
   },
   methods: {
@@ -125,18 +138,17 @@ export default {
   }
 };
 
+// TODO: think about the possibility to delete and update transactions, maybe in the cycles page similar to what's done with the accounts
+
+// TODO: think about the routing and fetching data from api once the app is deployed
+
 // TODO: the pages (routes) of the app:
 // I thinking of the following main pages:
 // * dashboard - completed:
-
-// * accounts - work in progress
-// just missing the ability to delete accounts,
-// the problem is how this action is going to affect other components that work with accounts
+// * accounts - completed
 // * reports - work in progress:
 // the future of this page is unclear since I moved the charts to the dashboard, but maybe its a god possibility to use this space to implement other functionalities like integration with other apis etc
-
 // * cycles - completed:
-
 // * home - completed:
 
 // TODO: time ? study more about axios and async/await : move on

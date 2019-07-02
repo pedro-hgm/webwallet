@@ -2,8 +2,8 @@
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
       <v-tooltip left>
-        <v-btn slot="activator" v-on="on" flat icon class="px-3">
-          <v-icon>edit</v-icon>
+        <v-btn slot="activator" v-on="on" icon>
+          <v-icon color="grey">edit</v-icon>
         </v-btn>
         <span>update account</span>
       </v-tooltip>
@@ -92,7 +92,7 @@ export default {
           .then(res => {
             this.loading = false;
             this.dialog = false;
-            this.requestAccount();
+            this.$emit("updateAccount");
 
             EventBus.$emit("snackbar", {
               value: true,
@@ -109,18 +109,6 @@ export default {
               message: "Sorry, but we couldn't update your account"
             });
           });
-      }
-    },
-    requestAccount() {
-      if (this.$store.getters.userId) {
-        axios
-          .get(`http://localhost:3000/accounts/${this.$store.getters.userId}`)
-          .then(res => {
-            if (res.status === 200) {
-              this.$store.commit("setAccount", res.data);
-            }
-          })
-          .catch(err => console.log(err));
       }
     },
     closeDialog() {

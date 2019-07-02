@@ -25,46 +25,32 @@ export default new Vuex.Store({
 			state.userId = payload;
 		},
 		setAccount(state, payload) {
-			state.userAccounts = [];
-			state.userAccounts.push(...payload);
+			state.userAccounts = payload;
 		},
 		setCategories(state, payload) {
-			state.categories = [];
-			state.categories.push(...payload);
+			state.categories = payload;
 		},
 		newAccount(state, payload) {
 			state.userAccounts.push(payload);
 		},
 		setCurrentExpenses(state, payload) {
-			state.currentExpenses = [];
-			state.currentExpenses.push(...payload);
-		},
-		newExpense(state, payload) {
-			// TODO: replace this for a call from the api since the user can create a new expense with a date that does not fit in the current one
-			state.currentExpenses.push(payload);
+			state.currentExpenses = payload;
 		},
 		setCurrentIncomes(state, payload) {
-			state.currentIncomes = [];
-			state.currentIncomes.push(...payload);
-		},
-		newIncome(state, payload) {
-			state.currentIncome.push(payload);
+			state.currentIncomes = payload;
 		},
 		setCycle(state, payload) {
-			state.userCycles = [];
-			state.userCycles.push(...payload);
+			state.userCycles = payload;
 		},
 		newCycle(state, payload) {
 			state.userCycles[state.userCycles.length - 1].current = false;
 			state.userCycles.push(payload);
 		},
 		setCycleIncomes(state, payload) {
-			state.cycleIncomes = [];
-			state.cycleIncomes.push(...payload);
+			state.cycleIncomes = payload;
 		},
 		setCycleExpenses(state, payload) {
-			state.cycleExpenses = [];
-			state.cycleExpenses.push(...payload);
+			state.cycleExpenses = payload;
 		}
 	},
 	actions   : {},
