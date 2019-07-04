@@ -113,7 +113,7 @@ export default {
         };
 
         axios
-          .post("http://localhost:3000/api/v1/cycles", {
+          .post("api/v1/cycles", {
             cycle
           })
           .then(res => {

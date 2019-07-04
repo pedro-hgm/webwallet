@@ -107,11 +107,7 @@ export default {
     requestAccount() {
       if (this.$store.getters.userId) {
         axios
-          .get(
-            `http://localhost:3000/api/v1/accounts/${
-              this.$store.getters.userId
-            }`
-          )
+          .get(`api/v1/accounts/${this.$store.getters.userId}`)
           .then(res => {
             this.$store.commit("setAccount", res.data);
           })
@@ -120,7 +116,7 @@ export default {
     },
     requestCategories() {
       axios
-        .get(`http://localhost:3000/api/v1/categories`)
+        .get(`api/v1/categories`)
         .then(res => {
           this.$store.commit("setCategories", res.data);
         })

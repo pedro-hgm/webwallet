@@ -96,7 +96,7 @@ export default {
         };
 
         axios
-          .post("http://localhost:3000/api/v1/accounts", {
+          .post("api/v1/accounts", {
             account
           })
           .then(res => {

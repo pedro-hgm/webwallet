@@ -17,7 +17,7 @@ export default {
   methods: {
     requestChartData() {
       axios
-        .post("http://localhost:3000/api/v1/categories/chart", {
+        .post("api/v1/categories/chart", {
           id: this.$store.getters.userId
         })
         .then(res => {

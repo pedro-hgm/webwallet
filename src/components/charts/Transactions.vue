@@ -32,9 +32,7 @@ export default {
   methods: {
     requestChartIncomes() {
       axios
-        .get(
-          `http://localhost:3000/api/v1/incomes/${this.$store.getters.userId}`
-        )
+        .get(`api/v1/incomes/${this.$store.getters.userId}`)
         .then(res => {
           this.incomes = res.data;
         })
@@ -44,9 +42,7 @@ export default {
     },
     requestChartExpenses() {
       axios
-        .get(
-          `http://localhost:3000/api/v1/expenses/${this.$store.getters.userId}`
-        )
+        .get(`api/v1/expenses/${this.$store.getters.userId}`)
         .then(res => {
           this.expenses = res.data;
         })

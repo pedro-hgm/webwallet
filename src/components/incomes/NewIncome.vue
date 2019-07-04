@@ -148,7 +148,7 @@ export default {
           user_id: this.user_id
         };
         axios
-          .post("http://localhost:3000/api/v1/incomes", {
+          .post("api/v1/incomes", {
             income
           })
           .then(res => {
@@ -180,7 +180,7 @@ export default {
     setBalance(id, value) {
       value = parseFloat(value);
       axios
-        .post("http://localhost:3000/api/v1/accounts/set_balance", {
+        .post("api/v1/accounts/set_balance", {
           id,
           value
         })

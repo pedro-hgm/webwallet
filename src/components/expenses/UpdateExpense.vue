@@ -116,7 +116,7 @@ export default {
         };
 
         axios
-          .put(`http://localhost:3000/api/v1/expenses/${this.id}`, {
+          .put(`api/v1/expenses/${this.id}`, {
             expense
           })
           .then(res => {

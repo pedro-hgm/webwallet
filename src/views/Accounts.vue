@@ -80,7 +80,7 @@ export default {
     deleteAccount(id) {
       if (confirm("Are you sure? This action can't be undone.")) {
         axios
-          .delete(`http://localhost:3000/api/v1/accounts/${id}`)
+          .delete(`api/v1/accounts/${id}`)
           .then(res => {
             this.requestAccount();
             EventBus.$emit("snackbar", {
@@ -102,11 +102,7 @@ export default {
     requestAccount() {
       if (this.$store.getters.userId) {
         axios
-          .get(
-            `http://localhost:3000/api/v1/accounts/${
-              this.$store.getters.userId
-            }`
-          )
+          .get(`api/v1/accounts/${this.$store.getters.userId}`)
           .then(res => {
             this.$store.commit("setAccount", res.data);
           })

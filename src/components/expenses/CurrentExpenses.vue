@@ -29,7 +29,7 @@ export default {
   methods: {
     requestExpensesByDate() {
       axios
-        .post("http://localhost:3000/api/v1/expenses/find", {
+        .post("api/v1/expenses/find", {
           year: this.year,
           month: this.month,
           id: this.$store.getters.userId

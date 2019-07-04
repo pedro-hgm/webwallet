@@ -296,9 +296,7 @@ export default {
     },
     requestCycles() {
       axios
-        .get(
-          `http://localhost:3000/api/v1/cycles/${this.$store.getters.userId}`
-        )
+        .get(`api/v1/cycles/${this.$store.getters.userId}`)
         .then(res => {
           this.cycles = res.data;
         })
@@ -308,7 +306,7 @@ export default {
     },
     requestCycleValues(id) {
       axios
-        .post("http://localhost:3000/api/v1/cycles/complete_cycle", {
+        .post("api/v1/cycles/complete_cycle", {
           id: id
         })
         .then(res => {
@@ -326,7 +324,7 @@ export default {
     endCycle() {
       if (confirm("Are you sure?")) {
         axios
-          .post("http://localhost:3000/api/v1/cycles/current", {
+          .post("api/v1/cycles/current", {
             id: this.currentCycle.id
           })
           .then(res => {
@@ -347,7 +345,7 @@ export default {
     deleteExpense(expenseId, value, accountId) {
       if (confirm("Are you sure? This action is permanent.")) {
         axios
-          .delete(`http://localhost:3000/api/v1/expenses/${expenseId}`)
+          .delete(`api/v1/expenses/${expenseId}`)
           .then(res => {
             this.setBalance(accountId, parseFloat(value));
             EventBus.$emit("snackbar", {
@@ -369,7 +367,7 @@ export default {
     deleteIncome(incomeId, value, accountId) {
       if (confirm("Are you sure? This action is permanent.")) {
         axios
-          .delete(`http://localhost:3000/api/v1/incomes/${incomeId}`)
+          .delete(`api/v1/incomes/${incomeId}`)
           .then(res => {
             this.setBalance(accountId, -parseFloat(value));
             EventBus.$emit("snackbar", {
@@ -390,7 +388,7 @@ export default {
     },
     setBalance(id, value) {
       axios
-        .post("http://localhost:3000/api/v1/accounts/set_balance", {
+        .post("api/v1/accounts/set_balance", {
           id,
           value
         })
@@ -405,11 +403,7 @@ export default {
     requestAccount() {
       if (this.$store.getters.userId) {
         axios
-          .get(
-            `http://localhost:3000/api/v1/accounts/${
-              this.$store.getters.userId
-            }`
-          )
+          .get(`api/v1/accounts/${this.$store.getters.userId}`)
           .then(res => {
             this.$store.commit("setAccount", res.data);
           })
