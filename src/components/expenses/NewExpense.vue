@@ -79,7 +79,7 @@
 
               <v-flex xs6>
                 <h3 class="grey--text mb-2">
-                  <v-icon class="mr-2">category</v-icon>Category:
+                  <v-icon class="mr-1">category</v-icon>Category:
                 </h3>
 
                 <v-layout column>

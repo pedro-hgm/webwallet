@@ -1,46 +1,42 @@
 <template>
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
-      <v-btn v-on="on" outline small round slot="activator">Sign Up</v-btn>
+      <v-tooltip top>
+        <v-btn slot="activator" v-on="on" icon dark small>
+          <v-icon color="grey">edit</v-icon>
+        </v-btn>
+        <span>Edit Income</span>
+      </v-tooltip>
     </template>
-
     <v-card>
       <v-card-title>
         <v-layout justify-center row>
-          <h2 class="grey--text">Sign Up</h2>
+          <h2 class="grey--text">Edit Income</h2>
         </v-layout>
       </v-card-title>
       <v-card-text>
         <v-form class="px-3" ref="form">
-          <v-text-field
-            color="#212121"
-            label="Email"
-            v-model="email"
-            prepend-icon="email"
-            :rules="rules"
-          ></v-text-field>
-          <v-text-field
-            color="#212121"
-            label="Password"
-            v-model="password"
-            type="password"
-            prepend-icon="vpn_key"
-            :rules="rules"
-          ></v-text-field>
+          <v-textarea
+            color="#81c784"
+            prepend-icon="notes"
+            label="Description"
+            v-model="incomeDescription"
+          ></v-textarea>
+
           <v-layout justify-center row>
             <v-btn
-              @click="signup"
+              @click="update"
               :loading="loading"
               depressed
               small
-              color="#212121"
+              color="#81c784"
               class="pa-1 mt-3 white--text"
-            >Join us</v-btn>
+            >Update</v-btn>
             <v-btn
               @click="closeDialog"
               depressed
               small
-              color="#212121"
+              color="#81c784"
               class="pa-1 mt-3 white--text"
             >cancel</v-btn>
           </v-layout>
@@ -53,55 +49,57 @@
 <script>
 import axios from "axios";
 import { EventBus } from "@/event-bus.js";
+import { mapState } from "vuex";
 export default {
+  name: "UpdateAccount",
+  props: {
+    description: String,
+    id: Number
+  },
   data() {
     return {
-      email: "",
-      password: "",
+      incomeDescription: this.description,
       rules: [value => value.length > 0 || "Can't be blank"],
       dialog: false,
       loading: false
     };
   },
+  computed: {
+    // ...mapState({
+    //   categories: state => state.categories
+    // })
+  },
   methods: {
-    signup() {
-      if (this.$refs.form.validate()) {
+    update() {
+      if (confirm("Are you sure?")) {
         this.loading = true;
 
-        const user = {
-          email: this.email,
-          password: this.password
+        const income = {
+          description: this.incomeDescription
         };
+
         axios
-          .post("http://localhost:3000/api/v1/users", {
-            user
+          .put(`http://localhost:3000/api/v1/incomes/${this.id}`, {
+            income
           })
           .then(res => {
             this.loading = false;
             this.dialog = false;
-
-            this.$store.commit("changeStatus", true);
-            this.$store.commit("changeId", res.data);
-            this.$router.push({
-              name: "dashboard"
-            });
+            this.$emit("updateIncome");
 
             EventBus.$emit("snackbar", {
               value: true,
               color: "#81C784",
-              message: "Welcome!"
+              message: "Income successfuly updated"
             });
-            this.email = "";
-            this.password = "";
           })
           .catch(err => {
             console.log(err);
             this.dialog = false;
-
             EventBus.$emit("snackbar", {
               value: true,
               color: "#E57373",
-              message: "Sorry, but we couldn't create your account."
+              message: "Sorry, but we couldn't update your income"
             });
           });
       }
@@ -113,8 +111,5 @@ export default {
 };
 </script>
 
-<style scoped>
-.test {
-  margin-bottom: 20px;
-}
+<style>
 </style>

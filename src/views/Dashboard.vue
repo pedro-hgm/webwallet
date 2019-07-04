@@ -142,7 +142,10 @@ export default {
   }
 };
 
-// TODO: think about the possibility to delete and update transactions, maybe in the cycles page similar to what's done with the accounts
+// TODO: check the layout for big screens
+
+// TODO: the charts layout really needs some love
+// maybe change the balance charts from pie to bar chart
 
 // TODO: think about the routing and fetching data from api once the app is deployed
 

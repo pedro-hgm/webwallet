@@ -76,13 +76,13 @@
         </v-layout>
       </v-container>
 
-      <v-container>
+      <v-container id="expenses">
         <v-layout justify-center row>
           <h2 class="blue-grey--text mb-1">Expenses</h2>
         </v-layout>
         <v-card v-for="(expense, index) in expenses" :key="index">
           <v-layout row wrap class="pa-3 expense">
-            <v-flex xs12 md4>
+            <v-flex xs12 md3>
               <div class="caption grey--text">Description</div>
               <div>{{expense.description}}</div>
             </v-flex>
@@ -90,30 +90,55 @@
               <div class="caption grey--text">Value</div>
               <div>$ {{expense.value}}</div>
             </v-flex>
-            <v-flex xs6 sm4 md2>
+            <v-flex xs6 sm2 md2>
               <div class="caption grey--text">Account</div>
               <div>{{expense.account_name}}</div>
             </v-flex>
-            <v-flex xs6 sm4 md2>
+            <v-flex xs6 sm2 md2>
               <div class="caption grey--text">Category</div>
               <div>{{expense.category_name}}</div>
             </v-flex>
-            <v-flex xs6 sm4 md2>
+            <v-flex xs6 sm2 md1>
               <div class="caption grey--text">Date</div>
               <div>{{expense.date}}</div>
+            </v-flex>
+            <v-flex xs2>
+              <v-layout row justify-space-around>
+                <v-flex class="mx-2 mt-1" xs4>
+                  <UpdateExpense
+                    @updateExpense="requestCycleValues(activeCycleId)"
+                    :description="expense.description"
+                    :id="expense.id"
+                    :category="expense.category_id"
+                  />
+                </v-flex>
+                <v-flex class="mx-2" xs4>
+                  <v-tooltip top>
+                    <v-btn
+                      slot="activator"
+                      @click="deleteExpense(expense.id, expense.value, expense.account_id)"
+                      icon
+                    >
+                      <v-icon color="grey">delete</v-icon>
+                    </v-btn>
+                    <span>delete expense</span>
+                  </v-tooltip>
+                </v-flex>
+                <v-spacer></v-spacer>
+              </v-layout>
             </v-flex>
           </v-layout>
           <v-divider></v-divider>
         </v-card>
       </v-container>
 
-      <v-container>
+      <v-container id="incomes">
         <v-layout justify-center row>
           <h2 class="blue-grey--text mb-1">Incomes</h2>
         </v-layout>
         <v-card v-for="(income, index) in incomes" :key="index">
           <v-layout row wrap class="pa-3 income">
-            <v-flex xs12 md6>
+            <v-flex xs12 md3>
               <div class="caption grey--text">Description</div>
               <div>{{income.description}}</div>
             </v-flex>
@@ -121,18 +146,43 @@
               <div class="caption grey--text">Value</div>
               <div>$ {{income.value}}</div>
             </v-flex>
-            <v-flex xs6 sm4 md2>
+            <v-flex xs6 sm2 md2>
               <div class="caption grey--text">Account</div>
               <div>{{income.account_name}}</div>
             </v-flex>
-            <v-flex xs6 sm4 md2>
+            <v-flex xs6 sm2 md2>
               <div class="caption grey--text">Date</div>
               <div>{{income.date}}</div>
+            </v-flex>
+            <v-flex xs2>
+              <v-layout row justify-space-around>
+                <v-flex class="mx-2 mt-1" xs4>
+                  <UpdateIncome
+                    @updateIncome="requestCycleValues(activeCycleId)"
+                    :description="income.description"
+                    :id="income.id"
+                  />
+                </v-flex>
+                <v-flex class="mx-2" xs4>
+                  <v-tooltip top>
+                    <v-btn
+                      slot="activator"
+                      @click="deleteIncome(income.id, income.value, income.account_id)"
+                      icon
+                    >
+                      <v-icon color="grey">delete</v-icon>
+                    </v-btn>
+                    <span>delete income</span>
+                  </v-tooltip>
+                </v-flex>
+                <v-spacer></v-spacer>
+              </v-layout>
             </v-flex>
           </v-layout>
           <v-divider></v-divider>
         </v-card>
       </v-container>
+
       <v-layout justify-center row>
         <CycleSelector :cycles="this.cycles" @cycleSelected="findCycle" />
         <v-btn
@@ -172,9 +222,12 @@
 import axios from "axios";
 import NewCycle from "@/components/cycles/NewCycle.vue";
 import CycleSelector from "@/components/cycles/cycleSelector.vue";
+import UpdateExpense from "@/components/expenses/UpdateExpense.vue";
+import UpdateIncome from "@/components/incomes/UpdateIncome.vue";
+import { EventBus } from "@/event-bus.js";
 export default {
   name: "Cycles",
-  components: { NewCycle, CycleSelector },
+  components: { NewCycle, CycleSelector, UpdateExpense, UpdateIncome },
   data() {
     return {
       cycles: [],
@@ -290,6 +343,78 @@ export default {
     newCycle(payload) {
       this.requestCycles();
       this.requestCycleValues(payload.id);
+    },
+    deleteExpense(expenseId, value, accountId) {
+      if (confirm("Are you sure? This action is permanent.")) {
+        axios
+          .delete(`http://localhost:3000/api/v1/expenses/${expenseId}`)
+          .then(res => {
+            this.setBalance(accountId, parseFloat(value));
+            EventBus.$emit("snackbar", {
+              value: true,
+              color: "#81C784",
+              message: "Expense successfuly deleted"
+            });
+          })
+          .catch(err => {
+            console.log(err);
+            EventBus.$emit("snackbar", {
+              value: true,
+              color: "#E57373",
+              message: "Sorry, but we couldn't delete your expense"
+            });
+          });
+      }
+    },
+    deleteIncome(incomeId, value, accountId) {
+      if (confirm("Are you sure? This action is permanent.")) {
+        axios
+          .delete(`http://localhost:3000/api/v1/incomes/${incomeId}`)
+          .then(res => {
+            this.setBalance(accountId, -parseFloat(value));
+            EventBus.$emit("snackbar", {
+              value: true,
+              color: "#81C784",
+              message: "Income successfuly deleted"
+            });
+          })
+          .catch(err => {
+            console.log(err);
+            EventBus.$emit("snackbar", {
+              value: true,
+              color: "#E57373",
+              message: "Sorry, but we couldn't delete your income"
+            });
+          });
+      }
+    },
+    setBalance(id, value) {
+      axios
+        .post("http://localhost:3000/api/v1/accounts/set_balance", {
+          id,
+          value
+        })
+        .then(res => {
+          this.requestCycleValues(this.activeCycleId);
+          this.requestAccount();
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    requestAccount() {
+      if (this.$store.getters.userId) {
+        axios
+          .get(
+            `http://localhost:3000/api/v1/accounts/${
+              this.$store.getters.userId
+            }`
+          )
+          .then(res => {
+            this.$store.commit("setAccount", res.data);
+          })
+          .catch(err => console.log(err));
+      }
     }
   },
   created() {
