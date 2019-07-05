@@ -1,21 +1,47 @@
 <template>
-  <v-dialog v-model="dialog" max-width="600px">
+  <v-dialog
+    v-model="dialog"
+    max-width="600px"
+  >
     <template v-slot:activator="{ on }">
-      <v-tooltip :disabled="disabled" top>
-        <v-btn :disabled="disabled" slot="activator" v-on="on" icon dark small>
-          <v-icon large color="#E57373">trending_down</v-icon>
+      <v-tooltip
+        :disabled="disabled"
+        top
+      >
+        <v-btn
+          :disabled="disabled"
+          slot="activator"
+          v-on="on"
+          icon
+          dark
+          small
+        >
+          <v-icon
+            large
+            color="#E57373"
+          >
+            trending_down
+          </v-icon>
         </v-btn>
         <span>New Expense</span>
       </v-tooltip>
     </template>
     <v-card>
       <v-card-title>
-        <v-layout justify-center row>
-          <h2 class="grey--text">New Expense</h2>
+        <v-layout
+          justify-center
+          row
+        >
+          <h2 class="grey--text">
+            New Expense
+          </h2>
         </v-layout>
       </v-card-title>
       <v-card-text>
-        <v-form class="px-3" ref="form">
+        <v-form
+          class="px-3"
+          ref="form"
+        >
           <v-text-field
             :rules="rules"
             type="number"
@@ -25,7 +51,7 @@
             v-model="value"
             prepend-icon="attach_money"
             color="#E57373"
-          ></v-text-field>
+          />
           <v-menu
             :close-on-content-click="true"
             :nudge-right="40"
@@ -47,22 +73,31 @@
                 prepend-icon="event"
                 readonly
                 v-on="on"
-              ></v-text-field>
+              />
             </template>
-            <v-date-picker :rules="rules" v-model="date" color="#E57373"></v-date-picker>
+            <v-date-picker
+              :rules="rules"
+              v-model="date"
+              color="#E57373"
+            />
           </v-menu>
           <v-textarea
             color="#E57373"
             prepend-icon="notes"
             label="Description"
             v-model="description"
-          ></v-textarea>
+          />
 
           <v-container>
-            <v-layout row justify-space-around>
+            <v-layout
+              row
+              justify-space-around
+            >
               <v-flex xs6>
                 <h3 class="grey--text mb-2">
-                  <v-icon class="mr-2">account_balance</v-icon>Account:
+                  <v-icon class="mr-2">
+                    account_balance
+                  </v-icon>Account:
                 </h3>
 
                 <v-layout column>
@@ -72,14 +107,20 @@
                     v-model="account_id"
                     :mandatory="true"
                   >
-                    <v-radio color="#E57373" :label="account.name" :value="account.id"></v-radio>
+                    <v-radio
+                      color="#E57373"
+                      :label="account.name"
+                      :value="account.id"
+                    />
                   </v-radio-group>
                 </v-layout>
               </v-flex>
 
               <v-flex xs6>
                 <h3 class="grey--text mb-2">
-                  <v-icon class="mr-1">category</v-icon>Category:
+                  <v-icon class="mr-1">
+                    category
+                  </v-icon>Category:
                 </h3>
 
                 <v-layout column>
@@ -90,21 +131,30 @@
                     :mandatory="true"
                     :prepend-icon="category.icon"
                   >
-                    <v-radio color="#E57373" :label="category.name" :value="category.id"></v-radio>
+                    <v-radio
+                      color="#E57373"
+                      :label="category.name"
+                      :value="category.id"
+                    />
                   </v-radio-group>
                 </v-layout>
               </v-flex>
             </v-layout>
           </v-container>
 
-          <v-layout justify-center row>
+          <v-layout
+            justify-center
+            row
+          >
             <v-btn
               @click="closeDialog"
               depressed
               small
               color="#E57373"
               class="pa-1 mt-3 white--text"
-            >cancel</v-btn>
+            >
+              cancel
+            </v-btn>
             <v-btn
               @click="create"
               :loading="loading"
@@ -112,7 +162,9 @@
               small
               color="#E57373"
               class="pa-1 mt-3 white--text"
-            >Create</v-btn>
+            >
+              Create
+            </v-btn>
           </v-layout>
         </v-form>
       </v-card-text>

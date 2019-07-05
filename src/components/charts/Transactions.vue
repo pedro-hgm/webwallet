@@ -1,5 +1,5 @@
 <template>
-  <div id="container-for-transactions"></div>
+  <div id="container-for-transactions" />
 </template>
 
 

@@ -1,5 +1,5 @@
 <template>
-  <div id="container-for-categories"></div>
+  <div id="container-for-categories" />
 </template>
 
 

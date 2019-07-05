@@ -1,13 +1,26 @@
 <template>
   <v-card class="text-xs-center ma-3 my-card">
     <v-card-text>
-      <v-layout row wrap>
+      <v-layout
+        row
+        wrap
+      >
         <v-flex xm6>
-          <v-icon large color="#5C6BC0" class="mb-2">account_balance_wallet</v-icon>
+          <v-icon
+            large
+            color="#5C6BC0"
+            class="mb-2"
+          >
+            account_balance_wallet
+          </v-icon>
         </v-flex>
         <v-flex xm6>
-          <h3 class="subheading grey--text">Current Balance:</h3>
-          <div class="subheading text">$ {{ currentBalance }}</div>
+          <h3 class="subheading grey--text">
+            Current Balance:
+          </h3>
+          <div class="subheading text">
+            $ {{ currentBalance }}
+          </div>
         </v-flex>
       </v-layout>
     </v-card-text>
@@ -17,7 +30,7 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  name: "currentBalance",
+  name: "CurrentBalance",
   data() {
     return {};
   },

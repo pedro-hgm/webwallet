@@ -1,9 +1,15 @@
 <template>
   <div id="charts">
     <h2>TO:</h2>
-    <v-select v-model="to" :items="currencies"></v-select>
+    <v-select
+      v-model="to"
+      :items="currencies"
+    />
     <h2>FROM:</h2>
-    <v-select v-model="from" :items="currencies"></v-select>
+    <v-select
+      v-model="from"
+      :items="currencies"
+    />
   </div>
 </template>
 

@@ -1,21 +1,47 @@
 <template>
-  <v-dialog v-model="dialog" max-width="600px">
+  <v-dialog
+    v-model="dialog"
+    max-width="600px"
+  >
     <template v-slot:activator="{ on }">
-      <v-tooltip :disabled="disabled" top>
-        <v-btn :disabled="disabled" slot="activator" v-on="on" icon dark small>
-          <v-icon large color="#81C784">trending_up</v-icon>
+      <v-tooltip
+        :disabled="disabled"
+        top
+      >
+        <v-btn
+          :disabled="disabled"
+          slot="activator"
+          v-on="on"
+          icon
+          dark
+          small
+        >
+          <v-icon
+            large
+            color="#81C784"
+          >
+            trending_up
+          </v-icon>
         </v-btn>
         <span>New Income</span>
       </v-tooltip>
     </template>
     <v-card>
       <v-card-title>
-        <v-layout justify-center row>
-          <h2 class="grey--text">New Income</h2>
+        <v-layout
+          justify-center
+          row
+        >
+          <h2 class="grey--text">
+            New Income
+          </h2>
         </v-layout>
       </v-card-title>
       <v-card-text>
-        <v-form class="px-3" ref="form">
+        <v-form
+          class="px-3"
+          ref="form"
+        >
           <v-text-field
             :rules="rules"
             type="number"
@@ -25,7 +51,7 @@
             v-model="value"
             prepend-icon="attach_money"
             color="#81C784"
-          ></v-text-field>
+          />
           <v-menu
             :close-on-content-click="true"
             :nudge-right="40"
@@ -47,16 +73,20 @@
                 prepend-icon="event"
                 readonly
                 v-on="on"
-              ></v-text-field>
+              />
             </template>
-            <v-date-picker :rules="rules" v-model="date" color="#81C784"></v-date-picker>
+            <v-date-picker
+              :rules="rules"
+              v-model="date"
+              color="#81C784"
+            />
           </v-menu>
           <v-textarea
             color="#81C784"
             prepend-icon="notes"
             label="Description"
             v-model="description"
-          ></v-textarea>
+          />
 
           <v-select
             :items="accounts"
@@ -67,16 +97,21 @@
             prepend-icon="account_balance"
             color="#81C784"
             class="mt-2"
-          ></v-select>
+          />
 
-          <v-layout justify-center row>
+          <v-layout
+            justify-center
+            row
+          >
             <v-btn
               @click="closeDialog"
               depressed
               small
               color="#81C784"
               class="pa-1 mt-3 white--text"
-            >cancel</v-btn>
+            >
+              cancel
+            </v-btn>
             <v-btn
               @click="create"
               :loading="loading"
@@ -84,7 +119,9 @@
               small
               color="#81C784"
               class="pa-1 mt-3 white--text"
-            >Create</v-btn>
+            >
+              Create
+            </v-btn>
           </v-layout>
         </v-form>
       </v-card-text>

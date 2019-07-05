@@ -1,36 +1,60 @@
 <template>
-  <v-dialog v-model="dialog" max-width="600px">
+  <v-dialog
+    v-model="dialog"
+    max-width="600px"
+  >
     <template v-slot:activator="{ on }">
       <v-tooltip top>
-        <v-btn slot="activator" v-on="on" icon dark small>
-          <v-icon color="grey">edit</v-icon>
+        <v-btn
+          slot="activator"
+          v-on="on"
+          icon
+          dark
+          small
+        >
+          <v-icon color="grey">
+            edit
+          </v-icon>
         </v-btn>
         <span>Edit Income</span>
       </v-tooltip>
     </template>
     <v-card>
       <v-card-title>
-        <v-layout justify-center row>
-          <h2 class="grey--text">Edit Income</h2>
+        <v-layout
+          justify-center
+          row
+        >
+          <h2 class="grey--text">
+            Edit Income
+          </h2>
         </v-layout>
       </v-card-title>
       <v-card-text>
-        <v-form class="px-3" ref="form">
+        <v-form
+          class="px-3"
+          ref="form"
+        >
           <v-textarea
             color="#81c784"
             prepend-icon="notes"
             label="Description"
             v-model="incomeDescription"
-          ></v-textarea>
+          />
 
-          <v-layout justify-center row>
+          <v-layout
+            justify-center
+            row
+          >
             <v-btn
               @click="closeDialog"
               depressed
               small
               color="#81c784"
               class="pa-1 mt-3 white--text"
-            >cancel</v-btn>
+            >
+              cancel
+            </v-btn>
             <v-btn
               @click="update"
               :loading="loading"
@@ -38,7 +62,9 @@
               small
               color="#81c784"
               class="pa-1 mt-3 white--text"
-            >Update</v-btn>
+            >
+              Update
+            </v-btn>
           </v-layout>
         </v-form>
       </v-card-text>

@@ -1,27 +1,46 @@
 <template>
-  <v-dialog v-model="dialog" max-width="600px">
+  <v-dialog
+    v-model="dialog"
+    max-width="600px"
+  >
     <template v-slot:activator="{ on }">
       <v-tooltip top>
-        <v-btn slot="activator" v-on="on" icon dark small>
-          <v-icon color="grey">edit</v-icon>
+        <v-btn
+          slot="activator"
+          v-on="on"
+          icon
+          dark
+          small
+        >
+          <v-icon color="grey">
+            edit
+          </v-icon>
         </v-btn>
         <span>Edit Expense</span>
       </v-tooltip>
     </template>
     <v-card>
       <v-card-title>
-        <v-layout justify-center row>
-          <h2 class="grey--text">Edit Expense</h2>
+        <v-layout
+          justify-center
+          row
+        >
+          <h2 class="grey--text">
+            Edit Expense
+          </h2>
         </v-layout>
       </v-card-title>
       <v-card-text>
-        <v-form class="px-3" ref="form">
+        <v-form
+          class="px-3"
+          ref="form"
+        >
           <v-textarea
             color="#E57373"
             prepend-icon="notes"
             label="Description"
             v-model="expenseDescription"
-          ></v-textarea>
+          />
           <v-select
             label="Categories"
             color="#E57373"
@@ -30,16 +49,21 @@
             item-text="name"
             item-value="id"
             prepend-icon="category"
-          ></v-select>
+          />
 
-          <v-layout justify-center row>
+          <v-layout
+            justify-center
+            row
+          >
             <v-btn
               @click="closeDialog"
               depressed
               small
               color="#E57373"
               class="pa-1 mt-3 white--text"
-            >cancel</v-btn>
+            >
+              cancel
+            </v-btn>
             <v-btn
               @click="update"
               :loading="loading"
@@ -47,7 +71,9 @@
               small
               color="#E57373"
               class="pa-1 mt-3 white--text"
-            >Update</v-btn>
+            >
+              Update
+            </v-btn>
           </v-layout>
         </v-form>
       </v-card-text>

@@ -1,5 +1,8 @@
 <template>
-  <v-dialog v-model="dialog" max-width="600px">
+  <v-dialog
+    v-model="dialog"
+    max-width="600px"
+  >
     <template v-slot:activator="{ on }">
       <v-tooltip left>
         <v-btn
@@ -21,15 +24,25 @@
     </template>
     <v-card>
       <v-card-title>
-        <v-layout justify-center row>
-          <h2 class="blue-grey--text">New Cycle</h2>
+        <v-layout
+          justify-center
+          row
+        >
+          <h2 class="blue-grey--text">
+            New Cycle
+          </h2>
         </v-layout>
       </v-card-title>
       <v-card-text>
         <p
           class="title mx-5"
-        >Choose a period of time to create your cycle. Only the selected month and year will be taken into account. The day will always be the first of the month.</p>
-        <v-form class="px-3" ref="form">
+        >
+          Choose a period of time to create your cycle. Only the selected month and year will be taken into account. The day will always be the first of the month.
+        </p>
+        <v-form
+          class="px-3"
+          ref="form"
+        >
           <v-menu
             :close-on-content-click="true"
             :nudge-right="40"
@@ -51,18 +64,27 @@
                 prepend-icon="event"
                 readonly
                 v-on="on"
-              ></v-text-field>
+              />
             </template>
-            <v-date-picker color="blue-grey" :rules="rules" v-model="date"></v-date-picker>
+            <v-date-picker
+              color="blue-grey"
+              :rules="rules"
+              v-model="date"
+            />
           </v-menu>
-          <v-layout justify-center row>
+          <v-layout
+            justify-center
+            row
+          >
             <v-btn
               @click="closeDialog"
               depressed
               small
               color="blue-grey"
               class="pa-1 mt-3 white--text"
-            >cancel</v-btn>
+            >
+              cancel
+            </v-btn>
             <v-btn
               @click="create"
               :loading="loading"
@@ -70,7 +92,9 @@
               small
               color="blue-grey"
               class="mx-0 mt-3 white--text"
-            >Create</v-btn>
+            >
+              Create
+            </v-btn>
           </v-layout>
         </v-form>
       </v-card-text>

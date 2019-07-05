@@ -1,5 +1,5 @@
 <template>
-  <div id="container-for-balance"></div>
+  <div id="container-for-balance" />
 </template>
 
 

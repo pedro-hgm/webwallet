@@ -1,28 +1,50 @@
 <template>
-  <v-dialog v-model="dialog" max-width="600px">
+  <v-dialog
+    v-model="dialog"
+    max-width="600px"
+  >
     <template v-slot:activator="{ on }">
       <v-tooltip top>
-        <v-btn slot="activator" v-on="on" icon dark small>
-          <v-icon large color="#5C6BC0">account_balance</v-icon>
+        <v-btn
+          slot="activator"
+          v-on="on"
+          icon
+          dark
+          small
+        >
+          <v-icon
+            large
+            color="#5C6BC0"
+          >
+            account_balance
+          </v-icon>
         </v-btn>
         <span>New Account</span>
       </v-tooltip>
     </template>
     <v-card>
       <v-card-title>
-        <v-layout justify-center row>
-          <h2 class="grey--text">New Account</h2>
+        <v-layout
+          justify-center
+          row
+        >
+          <h2 class="grey--text">
+            New Account
+          </h2>
         </v-layout>
       </v-card-title>
       <v-card-text>
-        <v-form class="px-3" ref="form">
+        <v-form
+          class="px-3"
+          ref="form"
+        >
           <v-text-field
             label="Account's name"
             v-model="name"
             prepend-icon="assignment"
             :rules="rules"
             color="#5C6BC0"
-          ></v-text-field>
+          />
           <v-text-field
             label="Initial balance"
             v-model="balance"
@@ -32,7 +54,7 @@
             prepend-icon="attach_money"
             :rules="rules"
             color="#5C6BC0"
-          ></v-text-field>
+          />
           <v-select
             prepend-icon="account_balance"
             :items="type"
@@ -41,16 +63,21 @@
             required
             color="#5C6BC0"
             v-model="kind"
-          ></v-select>
+          />
 
-          <v-layout justify-center row>
+          <v-layout
+            justify-center
+            row
+          >
             <v-btn
               @click="closeDialog"
               depressed
               small
               color="#5C6BC0"
               class="pa-1 mt-3 white--text"
-            >cancel</v-btn>
+            >
+              cancel
+            </v-btn>
             <v-btn
               @click="create"
               :loading="loading"
@@ -58,7 +85,9 @@
               small
               color="#5C6BC0"
               class="pa-1 mt-3 white--text"
-            >create</v-btn>
+            >
+              create
+            </v-btn>
           </v-layout>
         </v-form>
       </v-card-text>

@@ -1,27 +1,44 @@
 <template>
-  <v-dialog v-model="dialog" max-width="600px">
+  <v-dialog
+    v-model="dialog"
+    max-width="600px"
+  >
     <template v-slot:activator="{ on }">
       <v-tooltip left>
-        <v-btn slot="activator" v-on="on" icon>
-          <v-icon color="grey">edit</v-icon>
+        <v-btn
+          slot="activator"
+          v-on="on"
+          icon
+        >
+          <v-icon color="grey">
+            edit
+          </v-icon>
         </v-btn>
         <span>update account</span>
       </v-tooltip>
     </template>
     <v-card>
       <v-card-title>
-        <v-layout justify-center row>
-          <h2 class="grey--text">Update Account</h2>
+        <v-layout
+          justify-center
+          row
+        >
+          <h2 class="grey--text">
+            Update Account
+          </h2>
         </v-layout>
       </v-card-title>
       <v-card-text>
-        <v-form class="px-3" ref="form">
+        <v-form
+          class="px-3"
+          ref="form"
+        >
           <v-text-field
             label="Account's name"
             v-model="accountName"
             prepend-icon="assignment"
             color="#5C6BC0"
-          ></v-text-field>
+          />
 
           <v-select
             prepend-icon="account_balance"
@@ -30,16 +47,21 @@
             required
             color="#5C6BC0"
             v-model="accountKind"
-          ></v-select>
+          />
 
-          <v-layout justify-center row>
+          <v-layout
+            justify-center
+            row
+          >
             <v-btn
               @click="closeDialog"
               depressed
               small
               color="#5C6BC0"
               class="pa-1 mt-3 white--text"
-            >cancel</v-btn>
+            >
+              cancel
+            </v-btn>
             <v-btn
               @click="update"
               :loading="loading"
@@ -47,7 +69,9 @@
               small
               color="#5C6BC0"
               class="pa-1 mt-3 white--text"
-            >update</v-btn>
+            >
+              update
+            </v-btn>
           </v-layout>
         </v-form>
       </v-card-text>
