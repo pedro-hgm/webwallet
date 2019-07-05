@@ -1,0 +1,4 @@
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Api-Key = HEADER_PLACEHOLDER
