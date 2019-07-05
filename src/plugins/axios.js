@@ -7,7 +7,7 @@ let API_KEY = process.env.VUE_APP_WEATHER_API_KEY;
 
 if (process.env.NODE_ENV === 'production') {
 	axios.defaults.baseURL = 'https://api-webwallet.herokuapp.com/';
-	API_KEY = process.env.VUE_APP_API_KEY;
+	// API_KEY = process.env.VUE_APP_API_KEY;
 }
 else {
 	axios.defaults.baseURL = 'http://localhost:3000/';
