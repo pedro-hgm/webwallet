@@ -101,6 +101,8 @@ export default {
           })
           .catch(err => {
             console.log(err);
+            this.loading = false;
+            this.dialog = false;
             EventBus.$emit("snackbar", {
               value: true,
               color: "#E57373",

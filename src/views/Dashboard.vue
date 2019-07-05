@@ -142,11 +142,6 @@ export default {
 
 // TODO: check the layout for big screens
 
-// TODO: the charts layout really needs some love
-// maybe change the balance charts from pie to bar chart
-
-// TODO: think about the routing and fetching data from api once the app is deployed
-
 // TODO: the pages (routes) of the app:
 // I thinking of the following main pages:
 // * dashboard - completed:

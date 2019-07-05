@@ -53,7 +53,7 @@
                 v-on="on"
               ></v-text-field>
             </template>
-            <v-date-picker :rules="rules" v-model="date" no-title></v-date-picker>
+            <v-date-picker color="blue-grey" :rules="rules" v-model="date"></v-date-picker>
           </v-menu>
           <v-layout justify-center row>
             <v-btn
@@ -131,6 +131,7 @@ export default {
           })
           .catch(err => {
             console.log(err);
+            this.loading = false;
             this.dialog = false;
             EventBus.$emit("snackbar", {
               value: true,

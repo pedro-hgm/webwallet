@@ -16,31 +16,6 @@
       </v-card-title>
       <v-card-text>
         <v-form class="px-3" ref="form">
-          <!-- <v-menu
-            :close-on-content-click="true"
-            :nudge-right="40"
-            lazy
-            transition="scale-transition"
-            offset-y
-            full-width
-            max-width="290px"
-            min-width="290px"
-          >
-            <template v-slot:activator="{ on }">
-              <v-text-field
-                :rules="rules"
-                color="#E57373"
-                v-model="date"
-                label="Date"
-                hint="YYYY/MM/DD format"
-                persistent-hint
-                prepend-icon="event"
-                readonly
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker color="#E57373" :rules="rules" v-model="date"></v-date-picker>
-          </v-menu>-->
           <v-textarea
             color="#E57373"
             prepend-icon="notes"
@@ -132,6 +107,7 @@ export default {
           })
           .catch(err => {
             console.log(err);
+            this.loading = false;
             this.dialog = false;
             EventBus.$emit("snackbar", {
               value: true,

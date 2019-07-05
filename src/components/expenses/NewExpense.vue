@@ -49,7 +49,7 @@
                 v-on="on"
               ></v-text-field>
             </template>
-            <v-date-picker :rules="rules" v-model="date" no-title></v-date-picker>
+            <v-date-picker :rules="rules" v-model="date" color="#E57373"></v-date-picker>
           </v-menu>
           <v-textarea
             color="#E57373"
@@ -200,6 +200,7 @@ export default {
           })
           .catch(err => {
             console.log(err);
+            this.loading = false;
             this.dialog = false;
             EventBus.$emit("snackbar", {
               value: true,
