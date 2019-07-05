@@ -29,6 +29,13 @@
           ></v-text-field>
           <v-layout justify-center row>
             <v-btn
+              @click="closeDialog"
+              depressed
+              small
+              color="#212121"
+              class="pa-1 mt-3 white--text"
+            >cancel</v-btn>
+            <v-btn
               @click="signup"
               :loading="loading"
               depressed
@@ -36,13 +43,6 @@
               color="#212121"
               class="pa-1 mt-3 white--text"
             >Join us</v-btn>
-            <v-btn
-              @click="closeDialog"
-              depressed
-              small
-              color="#212121"
-              class="pa-1 mt-3 white--text"
-            >cancel</v-btn>
           </v-layout>
         </v-form>
       </v-card-text>

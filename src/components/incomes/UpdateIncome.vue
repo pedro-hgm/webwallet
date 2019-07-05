@@ -25,6 +25,13 @@
 
           <v-layout justify-center row>
             <v-btn
+              @click="closeDialog"
+              depressed
+              small
+              color="#81c784"
+              class="pa-1 mt-3 white--text"
+            >cancel</v-btn>
+            <v-btn
               @click="update"
               :loading="loading"
               depressed
@@ -32,13 +39,6 @@
               color="#81c784"
               class="pa-1 mt-3 white--text"
             >Update</v-btn>
-            <v-btn
-              @click="closeDialog"
-              depressed
-              small
-              color="#81c784"
-              class="pa-1 mt-3 white--text"
-            >cancel</v-btn>
           </v-layout>
         </v-form>
       </v-card-text>

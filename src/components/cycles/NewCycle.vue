@@ -57,6 +57,13 @@
           </v-menu>
           <v-layout justify-center row>
             <v-btn
+              @click="closeDialog"
+              depressed
+              small
+              color="blue-grey"
+              class="pa-1 mt-3 white--text"
+            >cancel</v-btn>
+            <v-btn
               @click="create"
               :loading="loading"
               depressed
@@ -64,13 +71,6 @@
               color="blue-grey"
               class="mx-0 mt-3 white--text"
             >Create</v-btn>
-            <v-btn
-              @click="closeDialog"
-              depressed
-              small
-              color="blue-grey"
-              class="pa-1 mt-3 white--text"
-            >cancel</v-btn>
           </v-layout>
         </v-form>
       </v-card-text>
