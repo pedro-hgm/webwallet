@@ -138,6 +138,8 @@ export default {
   }
 };
 
+// TODO: remember to cancel the loading animation in the buttons if something goes wrong
+
 // TODO: check the layout for big screens
 
 // TODO: the charts layout really needs some love

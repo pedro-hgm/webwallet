@@ -3,20 +3,26 @@
 import Vue from 'vue';
 import axios from 'axios';
 
-const API_KEY = process.env.VUE_APP_WEATHER_API_KEY;
-
 if (process.env.NODE_ENV === 'production') {
 	axios.defaults.baseURL = 'https://api-webwallet.herokuapp.com/';
+	const API_KEY = process.env.VUE_APP_API_KEY;
+	axios.defaults.headers.common = {
+		'X-Api-Key' : API_KEY
+	};
 }
 else {
 	axios.defaults.baseURL = 'http://localhost:3000/';
+	const API_KEY = process.env.VUE_APP_WEATHER_API_KEY;
+	axios.defaults.headers.common = {
+		'X-Api-Key' : API_KEY
+	};
 }
 
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
-axios.defaults.headers.common = {
-	'X-Api-Key' : API_KEY
-};
+// axios.defaults.headers.common = {
+// 	'X-Api-Key' : API_KEY
+// };
 // ['X-Api-Key'] = API_KEY;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
