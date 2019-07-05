@@ -30,7 +30,7 @@
         <v-flex xs12 md5 class="mb-3">
           <Balance v-if="hasAccount" />
         </v-flex>
-        <v-flex xs12 md5 class="mb3">
+        <v-flex xs12 md5 class="mb-3">
           <Categories v-if="hasAccount" />
         </v-flex>
       </v-layout>
@@ -161,7 +161,7 @@ export default {
 
 <style scoped>
 .btns {
-  margin-top: 5em;
+  margin-top: 4em;
 }
 .my-card {
   border-radius: 20px;
