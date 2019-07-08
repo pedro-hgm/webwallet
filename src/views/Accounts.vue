@@ -1,86 +1,37 @@
 <template>
   <div id="accounts">
     <div>
-      <v-layout
-        v-if="!hasAccount"
-        justify-center
-        row
-        wrap
-      >
+      <v-layout v-if="!hasAccount" justify-center row wrap>
         <v-flex xs12>
-          <v-alert
-            v-model="alert"
-            color="blue-grey"
-            outline
-            dismissible
-            icon="new_releases"
-          >
-            <h5 class="subheading">
-              There are no accounts to display
-            </h5>
+          <v-alert v-model="alert" color="blue-grey" outline dismissible icon="new_releases">
+            <h5 class="subheading">There are no accounts to display</h5>
           </v-alert>
         </v-flex>
       </v-layout>
     </div>
     <v-container class="my-5">
-      <v-layout
-        justify-center
-        row
-        wrap
-      >
+      <v-layout justify-center row wrap>
         <v-flex xs12>
-          <h1 class="display-1 grey--text mb-5 text-xs-center">
-            My Accounts
-          </h1>
+          <h1 class="display-1 grey--text mb-5 text-xs-center">My Accounts</h1>
         </v-flex>
       </v-layout>
-      <v-expansion-panel
-        inset
-        expand
-      >
-        <v-expansion-panel-content
-          v-for="(account,index) in accounts"
-          :key="index"
-        >
+      <v-expansion-panel inset expand>
+        <v-expansion-panel-content v-for="(account,index) in accounts" :key="index">
           <template v-slot:header>
-            <div class="subheading">
-              {{ account.name }}
-            </div>
+            <div class="subheading">{{ account.name }}</div>
           </template>
           <v-card>
-            <v-layout
-              justify-center
-              row
-              wrap
-              class="pa-3"
-            >
-              <v-flex
-                xs4
-                md2
-              >
-                <div class="caption grey--text ml-2">
-                  Balance
-                </div>
-                <div class="ml-2">
-                  $ {{ account.balance }}
-                </div>
+            <v-layout justify-center row wrap class="pa-3">
+              <v-flex xs4 md2>
+                <div class="caption grey--text ml-2">Balance</div>
+                <div class="ml-2">$ {{ account.balance }}</div>
               </v-flex>
-              <v-flex
-                xs4
-                sm2
-              >
-                <div class="caption grey--text ml-2">
-                  Type
-                </div>
-                <div class="ml-2">
-                  {{ account.kind }}
-                </div>
+              <v-flex xs4 sm2>
+                <div class="caption grey--text ml-2">Type</div>
+                <div class="ml-2">{{ account.kind }}</div>
               </v-flex>
               <v-spacer />
-              <v-flex
-                xs2
-                sm1
-              >
+              <v-flex xs2 sm1>
                 <UpdateAccount
                   :name="account.name"
                   :kind="account.kind"
@@ -88,19 +39,10 @@
                   @updateAccount="requestAccount"
                 />
               </v-flex>
-              <v-flex
-                xs2
-                sm1
-              >
+              <v-flex xs2 sm1>
                 <v-tooltip top>
-                  <v-btn
-                    slot="activator"
-                    @click="deleteAccount(account.id)"
-                    icon
-                  >
-                    <v-icon color="grey">
-                      delete
-                    </v-icon>
+                  <v-btn slot="activator" @click="deleteAccount(account.id)" icon>
+                    <v-icon color="grey">delete</v-icon>
                   </v-btn>
                   <span>delete account</span>
                 </v-tooltip>
@@ -124,6 +66,18 @@ export default {
     return {
       alert: true
     };
+  },
+  computed: {
+    accounts() {
+      return this.$store.getters.getAccounts;
+    },
+    hasAccount() {
+      if (this.accounts.length) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   },
   methods: {
     beforeRouteEnter(to, from, next) {
@@ -165,18 +119,6 @@ export default {
             this.$store.commit("setAccount", res.data);
           })
           .catch(err => console.log(err));
-      }
-    }
-  },
-  computed: {
-    accounts() {
-      return this.$store.getters.getAccounts;
-    },
-    hasAccount() {
-      if (this.accounts.length) {
-        return true;
-      } else {
-        return false;
       }
     }
   }

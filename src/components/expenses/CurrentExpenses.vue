@@ -1,26 +1,13 @@
 <template>
   <v-card class="text-xs-center ma-3 my-card">
     <v-card-text>
-      <v-layout
-        row
-        wrap
-      >
+      <v-layout row wrap>
         <v-flex xm6>
-          <v-icon
-            large
-            color="#E57373"
-            class="mb-2"
-          >
-            trending_down
-          </v-icon>
+          <v-icon large color="#E57373" class="mb-2">trending_down</v-icon>
         </v-flex>
         <v-flex xm6>
-          <h3 class="subheading grey--text">
-            Monthly Expenses:
-          </h3>
-          <div class="subheading text">
-            $ {{ currentExpenses }}
-          </div>
+          <h3 class="subheading grey--text">Monthly Expenses:</h3>
+          <div class="subheading text">$ {{ currentExpenses }}</div>
         </v-flex>
       </v-layout>
     </v-card-text>
@@ -38,6 +25,25 @@ export default {
       year: null,
       month: null
     };
+  },
+  computed: {
+    ...mapState({
+      expenses: state => state.currentExpenses
+    }),
+
+    currentExpenses() {
+      if (this.expenses) {
+        const expenses = this.expenses;
+        let currentExpenses = 0.0;
+        for (const expense of expenses) {
+          currentExpenses += parseFloat(expense.value);
+        }
+        return currentExpenses;
+      } else {
+        const currentExpenses = 0.0;
+        return currentExpenses;
+      }
+    }
   },
   methods: {
     requestExpensesByDate() {
@@ -60,25 +66,7 @@ export default {
       this.month = fullDate.getMonth() + 1;
     }
   },
-  computed: {
-    ...mapState({
-      expenses: state => state.currentExpenses
-    }),
 
-    currentExpenses() {
-      if (this.expenses) {
-        const expenses = this.expenses;
-        let currentExpenses = 0.0;
-        for (const expense of expenses) {
-          currentExpenses += parseFloat(expense.value);
-        }
-        return currentExpenses;
-      } else {
-        const currentExpenses = 0.0;
-        return currentExpenses;
-      }
-    }
-  },
   created() {
     this.getDate();
     this.requestExpensesByDate();
