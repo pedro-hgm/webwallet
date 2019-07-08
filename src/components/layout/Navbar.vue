@@ -103,6 +103,7 @@ export default {
     logout() {
       this.$store.commit("changeStatus", false);
       this.$store.commit("changeId", null);
+      this.drawer = false
       this.$router.push({ name: "home" });
     }
   },
