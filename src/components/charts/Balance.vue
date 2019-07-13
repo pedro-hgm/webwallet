@@ -91,6 +91,7 @@ export default {
 </script>
 
 <style>
+@import "https://code.highcharts.com/5.0.0/css/highcharts.css";
 #container-for-balance {
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.7);

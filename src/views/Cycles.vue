@@ -324,7 +324,7 @@ export default {
     endCycle() {
       if (confirm("Are you sure?")) {
         axios
-          .post("api/v1/cycles/current", {
+          .post("api/v1/cycles/end_cycle", {
             id: this.currentCycle.id
           })
           .then(res => {

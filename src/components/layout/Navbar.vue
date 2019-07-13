@@ -48,7 +48,6 @@ export default {
       links: [
         { icon: "dashboard", text: "Dashboard", route: "/dashboard" },
         { icon: "restore", text: "My Cycles", route: "/cycles" },
-        { icon: "bar_chart", text: "Reports", route: "/reports" },
         { icon: "account_balance", text: "Accounts", route: "/accounts" }
       ],
       snackbar: {

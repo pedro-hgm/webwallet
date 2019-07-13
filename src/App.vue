@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import Navbar from "@/components/layout/Navbar.vue";
 
 export default {
