@@ -202,19 +202,6 @@ export default {
     });
   }
 };
-
-// TODO: check the layout for big screens
-
-// TODO: the pages (routes) of the app:
-// I thinking of the following main pages:
-// * dashboard - completed:
-// * accounts - completed
-// * reports - work in progress:
-// the future of this page is unclear since I moved the charts to the dashboard, but maybe its a god possibility to use this space to implement other functionalities like integration with other apis etc
-// * cycles - completed:
-// * home - completed:
-
-// TODO: time ? study more about axios and async/await : move on
 </script>
 
 <style scoped>
